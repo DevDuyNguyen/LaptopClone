@@ -2,7 +2,9 @@ package com.example.LaptopShopClone.Controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.LaptopShopClone.Entity.DanhMuc;
+import com.example.LaptopShopClone.Entity.HangSanXuat;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.ServiceImpl.SanPhamServiceImpl;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
@@ -49,8 +53,17 @@ public class ClientSearchController {
 		List<SanPham> resultList=sanPhamServiceImpl.searchSanPham(searchSanPhamCriteria, page, resultPerPage);
 		List<Integer> pageList=new ArrayList<Integer>();
 		int totalCount=this.sanPhamServiceImpl.getTotalResultCount(searchSanPhamCriteria);
-		int totalPage=(int) Math.ceil(totalCount/resultPerPage);
+		int totalPage=(int) Math.ceil((double)totalCount/resultPerPage);//luon luon can than auto casting
 		
+		Set<DanhMuc> danhMucList=new HashSet<DanhMuc>();
+		Set<HangSanXuat> hangSanXuatList=new HashSet<HangSanXuat>();
+		
+		for(SanPham sp:resultList) {
+			danhMucList.add(sp.getDanhMuc());
+			hangSanXuatList.add(sp.getHangSanXuat());
+			System.out.println(sp);
+		}
+
 		
 		if(page==1||page==2||page==3||page==4) {
 			for(int i=1; i<=totalPage && i<=4; ++i) {
@@ -74,10 +87,6 @@ public class ClientSearchController {
 			}
 		}
 		
-		System.out.println("pageList:");
-		for(Integer p:pageList) {
-			System.out.println(p);
-		}
 		
 		model.addAttribute("resultList", resultList);
 		model.addAttribute("pageList", pageList);
@@ -91,6 +100,8 @@ public class ClientSearchController {
 		model.addAttribute("tenSanPham", tenSanPham);
 		model.addAttribute("routing", "/simpleSearch");
 		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("danhMucList", danhMucList);
+		model.addAttribute("hangSanXuatList", hangSanXuatList);
 		
 		System.out.println("page:"+page);
 		

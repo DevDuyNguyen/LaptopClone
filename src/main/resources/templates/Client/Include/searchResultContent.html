@@ -52,9 +52,10 @@
 						<!-- show anh cua san pham, not done -->
 						<img style="width: 300px; height: 238px" src="/laptopshop/img/${sanpham.id}.png">
 						
-						<h3 th:text="*{tenSanPham}"></h3>
+						<h3 th:text="${sanPham.tenSanPham}"></h3>
+						
 					</a>
-					<h3 class="changeToVND" th:text="*{donGia}"></h3><!-- Not done: chua thuc hien code chuyen doi -->
+					<h3 class="changeToVND" th:text="${sanPham.donGia}"></h3><!-- Not done: chua thuc hien code chuyen doi -->
 					
 					<!-- Not done: chua thuc hien add to cart -->
 					<!-- <button onClick="addToCart(${sanpham.id})" > -->
@@ -65,8 +66,8 @@
 			</div>
 		</div>
 		  
-		<div class="pagination">
-			<div th:unless="${page}==1">
+		<div class="pagination" th:if="${totalPage>=1}">
+			<div th:unless="${page==1}">
 				<!-- ${routing}?tenSanPham=${tenSanPham}&sort=${sort}&minValue=${minValue}&maxValue=${maxValue}&danhMuc=${danhMuc}&hsx=${hsx})&page=$(page)-1] -->
 				<a th:href="${routing}+'?tenSanPham='+${tenSanPham}+'&sort='+${sort}+'&minValue='+${minValue}+'&maxValue='+${maxValue}+'&danhMuc='+${danhMuc}+'&hsx='+${hsx}+'&page='+${page-1}">Back</a>	
 			</div>
@@ -82,6 +83,43 @@
 			
 			
 		</div>
+		
+		<div class="content-sidebar">
+		    		<h4>Lọc sản phẩm</h4>		    			
+						<form>
+							<input type="hidden" name="tenSanPham" th:value="${tenSanPham}">
+        				<p>Mức giá</p>
+        				<div class="select-range">
+        					<p>Gia nhỏ nhất</p>
+        					<input type="number" name="minValue" th:value="${minValue}">
+        					<p>Gia lớn nhất</p>
+        					<input type="number" name="maxValue" th:value="${maxValue!=-1}?${maxValue}">
+        				</div>   				
+        				<p>Danh mục</p>
+        				<div class="select-range">
+        					<select name="danhMuc" class="form-control" th:value="${danhMuc}">
+        						<option value="">Tất cả danh mục</option>
+        						<div th:each="brand: ${danhMucList}">
+        							<option th:if="${brand.tenDanhMuc==danhMuc}" th:value="${brand.tenDanhMuc}" th:text="${brand.tenDanhMuc}" selected></option>
+        							<option th:unless="${brand.tenDanhMuc==danhMuc}" th:value="${brand.tenDanhMuc}" th:text="${brand.tenDanhMuc}"></option>
+        						</div>					
+        					</select>
+        				</div>
+        				<p>Hãng sản xuất</p>
+        				<div class="select-range">
+        					<select name="hsx" class="form-control">
+        						<option value="">Tất cả nhà sản xuất</option>
+        						<div th:each="hsx1: ${hangSanXuatList}">
+        							
+        							<option th:if="${hsx1.tenHangSanXuat==hsx}" th:value="${hsx1.tenHangSanXuat}" th:text="${hsx1.tenHangSanXuat}" selected></option>
+        							<option th:unless="${hsx1.tenHangSanXuat==hsx}" th:value="${hsx1.tenHangSanXuat}" th:text="${hsx1.tenHangSanXuat}" ></option>
+        						</div>				
+        					</select>
+        				</div>
+        					<input class="search-submit" type="submit" value="Lọc sản phẩm">
+						</form>
+						
+		 </div>
 		
 	
 	</div>
