@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+	<div class="login-page">
+		<div class="form">
+		    <h2 class="form-signin-heading" style="text-align: center">LaptopShop - Đăng nhập</h2>
+		    <hr>
+			
+			<!-- ngan chan nguoi dung danh nhap khi da dang nhap thanh cong -->
+
+			<form class="login-form" method="POST" th:action="@{/login}">
+			    
+				<input type="text" placeholder="Email" name="email" required="required" style="padding:  10px;" autofocus/> 
+				<div th:if="${emailError}">
+					<p th:text="${emailError}" style="color: red"></p>
+				</div>
+				
+				<input type="password" placeholder="Mật khẩu" name="password" required="required" style="padding:  10px;" /> 
+				<div th:if="${passwordError}">
+					<p th:text="passwordError" style="color: red"></p>
+				</div>
+				
+				<div th:each="error:${loginErrors}">
+					<p th:text="${error}" style="color: red"></p>
+				</div>
+				
+				
+                <label style="padding-right: 130px; font-size: 15px;" id="label">
+                    <input type="checkbox" class="form-check-input" id="" name="remember-me">
+                     Duy trì đăng nhập</label>
+				
+				<input id="submit" type="submit" value="ĐĂNG NHẬP">
+				<p class="message" style="font-size: 18; padding-top:10px"> Chưa có tài khoản? <a href="<c:url value='/register'/> ">Tạo tài khoản mới</a></p>
+			</form>
+		</div>
+	</div>
+	
+</body>
+</html>

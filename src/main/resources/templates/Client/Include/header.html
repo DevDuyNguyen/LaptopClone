@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+
+	<!----start-Header---->
+	<div class="header" th:fragment="header">
+		<div class="search-bar">
+			<form th:action="@{/simpleSearch}">
+				<input type="text" name="tenSanPham"><input type="submit" value="Search">
+			</form>
+		</div>
+		<div class="clear"></div>
+
+		<div class="header-top-nav ">
+			
+
+			
+				<ul>
+					<li><a th:href="@{/register}">Đăng
+							kí</a></li>
+					<li><a href="@{/login}">Đăng
+							nhập</a></li>
+					<li><a href="@{/cart}"> <span>Giỏ hàng&nbsp;&nbsp;&nbsp;</span></a><span class="glyphicon glyphicon-shopping-cart"></span></li>
+
+				</ul>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	
+</body>
+</html>

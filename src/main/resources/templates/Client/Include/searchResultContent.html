@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	
+	<style th:fragment="searchBodyStyle">
+		a.curentPage{
+			background: #222;
+    		color: white;
+		}
+	</style>
+</head>
+
+<body>
+	
+	
+	<div id="searchBody" th:fragment="searchBody">
+		<div class="sort_product">	
+			<form action="">
+				<input type="hidden" th:value="${tenSanPham}" name="tenSanPham"><!-- de cac tieu chi loc, search -->
+				<input type="hidden" th:value="${sort}" name="sort">
+				<input type="hidden" th:value="${minValue}" name="minValue">
+				<input type="hidden" th:value="${maxValue}" name="maxValue">
+				<input type="hidden" th:value="${danhMuc}" name="danhMuc">
+				<input type="hidden" th:value="${hsx}" name="hsx">
+				<div class="inline">
+					<select name="sort" class="form-control">
+						<option value=""></option>
+						<option value="newest">Mới nhất</option>
+						<option value="priceAsc">Giá tăng dần</option>
+						<option value="priceDes">Giá giảm dần</option>    					
+					</select>
+				</div>
+				
+				<div class="inline">
+					<input class="search-submit" type="submit" value="Sắp xếp" >
+				</div>
+			</form>
+		</div> 
+		
+		<div class="searchResult">
+			<div th:unless="${hasResult}">
+				<h4>Không tìm thấy kết quả nào</h4>
+			</div>
+			
+			<div th:each="sanPham:${resultList}">
+				
+				<div>
+					<a href=""><!-- xem chi tiet san pham, not done -->
+					
+						<!-- show anh cua san pham, not done -->
+						<img style="width: 300px; height: 238px" src="/laptopshop/img/${sanpham.id}.png">
+						
+						<h3 th:text="*{tenSanPham}"></h3>
+					</a>
+					<h3 class="changeToVND" th:text="*{donGia}"></h3><!-- Not done: chua thuc hien code chuyen doi -->
+					
+					<!-- Not done: chua thuc hien add to cart -->
+					<!-- <button onClick="addToCart(${sanpham.id})" > -->
+					<span></span>Giỏ hàng</button>
+					<h3></h3>
+				</div>
+				
+			</div>
+		</div>
+		  
+		<div class="pagination">
+			<div th:unless="${page}==1">
+				<!-- ${routing}?tenSanPham=${tenSanPham}&sort=${sort}&minValue=${minValue}&maxValue=${maxValue}&danhMuc=${danhMuc}&hsx=${hsx})&page=$(page)-1] -->
+				<a th:href="${routing}+'?tenSanPham='+${tenSanPham}+'&sort='+${sort}+'&minValue='+${minValue}+'&maxValue='+${maxValue}+'&danhMuc='+${danhMuc}+'&hsx='+${hsx}+'&page='+${page-1}">Back</a>	
+			</div>
+			
+			<div th:each="a_page:${pageList}">
+				<a th:href="${routing}+'?tenSanPham='+${tenSanPham}+'&sort='+${sort}+'&minValue='+${minValue}+'&maxValue='+${maxValue}+'&danhMuc='+${danhMuc}+'&hsx='+${hsx}+'&page='+${a_page}" th:text="${a_page}" th:class="${a_page==page}?curentPage"></a>	
+			</div>
+			
+			<div th:unless="${page}==${totalPage}">
+				<a th:href="${routing}+'?tenSanPham='+${tenSanPham}+'&sort='+${sort}+'&minValue='+${minValue}+'&maxValue='+${maxValue}+'&danhMuc='+${danhMuc}+'&hsx='+${hsx}+'&page='+${page+1}">Next</a>
+				
+			</div>
+			
+			
+		</div>
+		
+	
+	</div>
+
+</body>
+</html>
