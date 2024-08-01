@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div id="chiTietSanPhamContent" th:fragment="chiTietSanPhamContent">
+		<div class="container">
+			<div class="card">
+				<div class="container-fliud">
+					<div class="wrapper row">
+						<div class="preview col-md-6">
+							
+							<div class="preview-pic tab-content">
+							<!-- Not done: chua thuc hien luu anh -->
+							  <div class="tab-pane active" id="pic-1"><img src="/laptopshop/img/${sp.getId()}.png" /></div>
+							</div>		
+						</div>
+						<div class="details col-md-6">
+							<p style="display:none" id="spid" th:text="${sp.id}"></p>
+							<h2 class="product-title" th:text="${sp.tenSanPham}"></h2>
+							<h4 class="price">Mô tả sản phẩm</h4>
+							<div th:if="${#strings.length(sp.cpu)>0}">
+								<p class="product-description" th:text="'CPU:'+${sp.cpu}"></p>
+							</div>
+							<div th:if="${#strings.length(sp.ram)>0}">
+								<p class="product-description" th:text="'RAM:'+${sp.ram}"></p>
+							</div>
+							<div th:if="${#strings.length(sp.thietKe)>0}">
+								<p class="product-description" th:text="'Thiết kế:'+${sp.thietKe}"></p>
+							</div>
+							<div th:if="${#strings.length(sp.heDieuHanh)>0}">
+								<p class="product-description" th:text="'Hệ điều hành:'+${sp.heDieuHanh}"></p>
+							</div>
+							<div th:if="${#strings.length(sp.manHinh)>0}">
+								<p class="product-description" th:text="'Màn hình:'+${sp.manHinh}"></p>
+							</div>
+							<div th:if="${#strings.length(sp.dungLuongPin)>0}">
+								<p class="product-description" th:text="'Dung lượng pin:'+${sp.dungLuongPin}"></p>
+							</div>
+							<p class="product-description" th:text="'Hãng sản xuất:'+${sp.hangSanXuat.tenHangSanXuat}"></p>
+							<p class="product-description"><span class="important">THÔNG TIN CHUNG:</span> <span th:text="sp.thongTinChung"></span></p>
+							<p class="product-description"><span class="important">BẢO HÀNH:</span> <span th:text="sp.thongTinBaoHanh"></span></p>
+							<!-- Not done: dieu chi lai gia ban sao cho de nhin -->
+							<h4 class="price" th:text="'Giá bán:'+${sp.donGia}"></h4>
+							<div class="action">
+								<!--not done: chua thuc hien thao tac chon vao gio hang -->
+								<button class="add-to-cart btn btn-warning" type="button">
+								<span class="glyphicon glyphicon-shopping-cart pull-center"></span> Giỏ hàng</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

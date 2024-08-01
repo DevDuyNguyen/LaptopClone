@@ -116,6 +116,16 @@ public class SanPhamRepository {
 		return resuList;
 	}
 	
+	public SanPham getSanPhamByID(long id) {
+		SessionFactory sessionFactory=this.sessionFactoryUtil.getSessionFactory();
+		Session session=sessionFactory.openSession();
+		Query sql=session.createNativeQuery("select * from sanpham where id= :id;", SanPham.class);
+		sql.setParameter("id", id);
+		SanPham sp=(SanPham)sql.getSingleResult();
+		
+		return sp;
+	}
+	
 	
 	
 	//search by id

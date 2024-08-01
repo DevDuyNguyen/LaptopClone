@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.LaptopShopClone.Entity.NguoiDung;
-import com.example.LaptopShopClone.ServiceImpl.NguoiDungServiceImpl;
+import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.ServiceImpl.Validation;
+import com.example.LaptopShopClone.ServiceInterface.NguoiDungService;
+import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,10 +28,12 @@ import jakarta.servlet.http.HttpSession;
 public class ClientController {
 	
 	@Autowired
-	NguoiDungServiceImpl nguoiDungServiceImpl;
+	NguoiDungService nguoiDungService;
 	@Autowired
 	Validation validation;
-	Model model1;
+	@Autowired
+	SanPhamService sanPhamService;
+	
 	
 	
 	@GetMapping("/home")
@@ -82,7 +86,7 @@ public class ClientController {
 		}
 		
 		//2
-//		if(this.nguoiDungServiceImpl.findByEmail(nguoiDung.getEmail())!=null) {
+//		if(this.nguoiDungService.findByEmail(nguoiDung.getEmail())!=null) {
 //			EmailErrors.add("Địa chỉ email đã được sử dụng");
 //			isAccepted=false;
 //		}
@@ -141,7 +145,7 @@ public class ClientController {
 		model.addAttribute("ConfirmPassErrors", ConfirmPassErrors);
 		
 		if(isAccepted) {
-			this.nguoiDungServiceImpl.saveUserForMember(nguoiDung);//chua xet role la member
+			this.nguoiDungService.saveUserForMember(nguoiDung);//chua xet role la member
 			
 		}
 		else {
@@ -171,7 +175,7 @@ public class ClientController {
 		if(password==null || password=="") {
 			passwordError="Password không được bỏ trống";
 		}
-		NguoiDung nguoiDung=this.nguoiDungServiceImpl.findByEmail(email);
+		NguoiDung nguoiDung=this.nguoiDungService.findByEmail(email);
 		if(nguoiDung==null) {
 			loginErrors.add("Tài khoản không tồn tại");
 		}
@@ -215,9 +219,16 @@ public class ClientController {
 		return "redirect:/home";
 	}
 	
+	@GetMapping("/sp")
+	public String xemChiTietSanPham(@RequestParam("id") long spID, Model model) {
+		SanPham sp=this.sanPhamService.getSanPhamByID(spID);
+		model.addAttribute("sp", sp);
+		
+		return "client/chiTietSanPham";
+	}
+	
 	@GetMapping("/test11")
 	public String test1(Model model) {
-		model1=model;
 		
 		return "client/home";
 		

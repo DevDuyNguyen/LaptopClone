@@ -27,5 +27,9 @@ public class SanPhamServiceImpl implements SanPhamService{
 		return resultList.size();
 	}
 	
+	public SanPham getSanPhamByID(long id) {
+		return this.sanPhamRepository.getSanPhamByID(id);
+	}
+	
 	
 }
