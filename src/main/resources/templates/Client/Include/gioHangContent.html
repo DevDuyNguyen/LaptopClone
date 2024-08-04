@@ -53,7 +53,7 @@
 							</tr>
 						</div>
 						<tr>
-							<div th:if="${isCartEmpty}">
+							<div th:unless="${isCartEmpty}">
 								<td colspan="3">
 								<a class="btn btn-primary" th:href="@{/home}"><span class="glyphicon glyphicon-hand-left"></span> Mua thêm sản phẩm khác</a>
 								
@@ -61,7 +61,7 @@
 								</td>
 							</div>
 								
-							<div th:unless="${isCartEmpty}">
+							<div th:if="${isCartEmpty}">
 								<td colspan="3">
 								<a class="btn btn-primary"  th:href="@{/home}">Mua thêm sản phẩm khác</a>
 								</td>

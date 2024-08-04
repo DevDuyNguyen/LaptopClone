@@ -2,6 +2,7 @@ package com.example.LaptopShopClone.Controller;
 
 import java.net.http.HttpRequest;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +35,10 @@ public class ClientController {
 	@Autowired
 	SanPhamService sanPhamService;
 	
-	
+	@ModelAttribute("loggedUser")
+	public NguoiDung getLoggedUser(HttpServletRequest httpServletRequest) {
+		return (NguoiDung)httpServletRequest.getSession().getAttribute("loggedUser");
+	}
 	
 	@GetMapping("/home")
 	public String getHomePage() {
@@ -229,12 +233,7 @@ public class ClientController {
 		return "client/chiTietSanPham";
 	}
 	
-	@GetMapping("/test11")
-	public String test1(Model model) {
-		
-		return "client/home";
-		
-	}
+	
 	
 	
 	

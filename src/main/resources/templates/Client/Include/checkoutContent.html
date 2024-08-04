@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="checkoutContent">
+		<div th:if="${loggedUser}">
+			<p>is logged</p>
+			
+			<div th:if="${hasError}">
+				<div th:each="error:${errors}">
+					 <h1 style="color: red" th:text="${error}"></h1>
+				</div>
+			</div>
+			
+			<div th:unless="${hasError}">
+				<form method="POST" th:action="@{/xulycheckout}">
+					<div class = "row">
+					<br><br>
+						<div class="col-md-3" >
+							<br>
+							<p class="border-p" style="line-height:1.5;"><b>Thông tin khách hàng</b></p>
+							
+							<p style="line-height:2;">Họ tên Quý khách </p>
+							
+							<input size="27" th:value="${nguoiDung.hoTen}" disabled id="hoTen">
+							
+							<p style="line-height:2;">Địa chỉ Email </p>
+							<input size="27" th:value="${nguoiDung.email}" disabled id="email">
+							
+							<p style="line-height:2;"> Số điện thoại </p>
+							<input size="27" th:value="${nguoiDung.soDienThoai}" disabled id="soDienThoai">
+							
+							<p style="line-height:2;">Địa chỉ(số nhà, đường, tỉnh thành) </p>
+							<textarea rows="5" cols="29" disabled th:text="${nguoiDung.diaChi}" id="diaChi"></textarea>
+										
+							<br><br>
+						</div>
+						
+						<div class="col-md-3">
+							<br>
+							<p class="border-p" style="line-height:1.5;"><b>Thông tin nhận hàng</b></p>
+						
+							<p style="line-height:2;" >Họ tên người nhận hàng *</p>
+							<input size="27" name="hoTenNguoiNhan" id="hoTenNguoiNhan" required>
+							
+							<p style="line-height:2;">Số điện thoại *</p>
+							<input size="27" name="sdtNhanHang" id="sdtNhanHang" required>
+							
+							
+							<p style="line-height:2;">Địa chỉ(số nhà, đường, tỉnh thành) *</p>
+							<textarea rows="5" cols="29" name="diaChiNhan" id="diaChiNhan" required></textarea>
+				
+							<br><br>
+							<!-- not done: input cuoi nay dung de lam gi -->
+							<input type="hidden" id="tongGiaTri" name="tongGiaTri">
+							<button onclick="getInfoFromAccount()" type="button">Lấy từ tài khoản người dùng</button>
+							
+						</div>
+						
+						<div class="col-md-6">
+							<br>
+							<p class="border-p" style="line-height:1.5;"><b>Giỏ hàng</b></p>
+							<br>
+							
+								<table class="table-cart-checkout mytable">
+									 <tr>
+										    <th>Ảnh</th>
+										    <th>Tên sản phẩm</th>
+										    <th>Đơn giá</th>
+										    <th>Tổng</th>
+									</tr>
+									<div th:each="sanPhamAndSoLuong: ${sanPhamAndSoLuongs}">
+								
+										 <tr style="text-align: center;">
+											    <td>
+											    	<!-- not done: chua them anh -->
+											    	<img src="" alt="not found img" class="img-reponsive fix-size-img">
+											    </td>
+											    <td style="color:green" th:text="${sanPhamAndSoLuong.sanPham.tenSanPham}"></td>
+											    
+											    
+											    <td class="donGia" >
+											    	<div class="check " style ="display: inline-block; " th:text="${sanPhamAndSoLuong.sanPham.donGia}"></div> 
+											    	<div style="display: inline-block; "> x <span th:text="${sanPhamAndSoLuong.soLuong}"></span></div>
+											    </td>
+											    
+											    <td>
+											    	<div class="total" th:text="${sanPhamAndSoLuong.soLuong * sanPhamAndSoLuong.sanPham.donGia}"></div> 
+											    </td>
+										</tr>
+									</div>
+									
+								</table>
+							
+							
+							<br>
+							<p>Tổng giá trị đơn hàng:     <b id="ordertotal"> </b></p>
+							<br>
+							 &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+							<a th:href="@{/gio-hang}" class="btn btn-primary">Quay lại giỏ hàng</a>
+							 &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							 
+							<button class="btn btn-danger pull-center" type="submit" id="submit">Gửi đơn hàng</button>
+						
+							<br><br>
+						
+						</div>
+					
+					</div>
+				</form>
+				
+			</div>
+			
+			
+						
+		</div>
+		<div th:unless="${loggedUser}">
+			<h1 style="color: red">Vui lòng đăng nhập</h1>
+		</div>
+		
+		<script src="js/checkout.js"></script>
+	</div>
+	
+	
+	
+</body>
+</html>
