@@ -18,16 +18,16 @@ public class GioHangServiceImpl implements GioHangService{
 		return this.gioHangRepository.getGioHangByNguoiDung(nguoiDung);
 	}
 	
-	public void addGioHangForNguoiDung(NguoiDung nguoiDung) {
+	public GioHang addGioHangForNguoiDung(NguoiDung nguoiDung) {
 		GioHang gioHang=new GioHang();
 		gioHang.setNguoiDung(nguoiDung);
-		this.gioHangRepository.save(gioHang);
+		return this.gioHangRepository.save(gioHang);
 	}
 	
 	public void updateGiohang(GioHang gioHang) {
 		this.gioHangRepository.save(gioHang);
 	}
-	public void saveOrUpdate(GioHang gioHang) {
-		this.gioHangRepository.save(gioHang);
+	public GioHang saveOrUpdate(GioHang gioHang) {
+		return this.gioHangRepository.save(gioHang);
 	}
 }

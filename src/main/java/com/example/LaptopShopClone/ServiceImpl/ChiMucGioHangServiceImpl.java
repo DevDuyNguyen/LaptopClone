@@ -18,8 +18,8 @@ public class ChiMucGioHangServiceImpl implements ChiMucGioHangService{
 		return this.chiMucGioHangRepository.getChiMucGioHangBySanPhangGioHang(sanPham, gioHang);
 	}
 	
-	public void SaveOrUpdate(ChiMucGioHang chiMucGioHang) {
-		this.chiMucGioHangRepository.save(chiMucGioHang);
+	public ChiMucGioHang SaveOrUpdate(ChiMucGioHang chiMucGioHang) {
+		return this.chiMucGioHangRepository.save(chiMucGioHang);
 	}
 	public void remove(ChiMucGioHang chiMucGioHang) {
 		this.chiMucGioHangRepository.remove(chiMucGioHang);

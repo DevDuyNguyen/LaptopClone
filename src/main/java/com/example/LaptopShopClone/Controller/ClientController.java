@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.LaptopShopClone.Entity.GioHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.ServiceImpl.Validation;
+import com.example.LaptopShopClone.ServiceInterface.GioHangService;
 import com.example.LaptopShopClone.ServiceInterface.NguoiDungService;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
 
@@ -34,6 +36,8 @@ public class ClientController {
 	Validation validation;
 	@Autowired
 	SanPhamService sanPhamService;
+	@Autowired
+	GioHangService gioaHangService;
 	
 	@ModelAttribute("loggedUser")
 	public NguoiDung getLoggedUser(HttpServletRequest httpServletRequest) {
@@ -152,6 +156,9 @@ public class ClientController {
 		
 		if(isAccepted) {
 			this.nguoiDungService.saveUserForMember(nguoiDung);//chua xet role la member
+			GioHang gioHang=new GioHang();
+			gioHang.setNguoiDung(nguoiDung);
+			this.gioaHangService.saveOrUpdate(gioHang);
 			
 		}
 		else {

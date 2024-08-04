@@ -32,7 +32,7 @@ public class ChiMucGioHangRepository {
 		return chiMucGioHang;
 	}
 	
-	public void save(ChiMucGioHang chiMucGioHang) {
+	public ChiMucGioHang save(ChiMucGioHang chiMucGioHang) {
 		ChiMucGioHang chiMucGioHang2=this.getChiMucGioHangBySanPhangGioHang(chiMucGioHang.getSanPham(), chiMucGioHang.getGioHang());
 		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
@@ -46,6 +46,8 @@ public class ChiMucGioHangRepository {
 			session.persist(chiMucGioHang);
 		}
 		transaction.commit();
+		
+		return chiMucGioHang;
 		
 	}
 	public void remove(ChiMucGioHang chiMucGioHang) {

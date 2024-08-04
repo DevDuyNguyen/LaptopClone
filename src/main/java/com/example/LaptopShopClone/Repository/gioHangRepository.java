@@ -34,7 +34,7 @@ public class gioHangRepository {
 		
 	}
 	
-	public void save(GioHang gioHang) {
+	public GioHang save(GioHang gioHang) {
 		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
 		
 		NguoiDung nguoiDung=gioHang.getNguoiDung();
@@ -50,6 +50,8 @@ public class gioHangRepository {
 			session.persist(gioHang);
 		}
 		transaction.commit();
+		
+		return gioHang;
 		
 	}
 	
