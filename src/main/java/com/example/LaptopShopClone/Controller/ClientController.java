@@ -130,10 +130,12 @@ public class ClientController {
 		if(!nguoiDung.getPassword().equals(repassword)) {
 			ConfirmPassErrors.add("Nhắc lại mật khẩu không chính xác");
 			isAccepted=false;
+			
 		}
 		//5
 		if(nguoiDung.getPassword().length()<8 || nguoiDung.getPassword().length()>32) {
 			PasswordErrors.add("Mật khẩu phải dài 8-32 ký tự");
+			isAccepted=false;
 		}
 		
 
@@ -166,7 +168,7 @@ public class ClientController {
 		return "/client/login.html";
 	}
 	@PostMapping("/login")
-	public String login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password, Model model, HttpServletRequest httpServletRequest) {
+	public String login(@RequestParam(name = "email", defaultValue = "d1@gmail.com") String email, @RequestParam(name = "password", defaultValue = "111") String password, Model model, HttpServletRequest httpServletRequest) {
 		String emailError=null;
 		String passwordError=null;
 		ArrayList<String> loginErrors=new ArrayList<String>();

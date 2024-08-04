@@ -27,7 +27,7 @@ public class VaiTroRepository {
 			Session session=sessionFactory.openSession();
 			Query query=session.createNativeQuery("select * from vaitro where tenVaiTro=:tenVaiTro;", VaiTro.class);
 			query.setParameter("tenVaiTro", name);
-			vaiTro=(VaiTro)query.getSingleResult();
+			vaiTro=(VaiTro)query.uniqueResult();
 			
 			
 		}

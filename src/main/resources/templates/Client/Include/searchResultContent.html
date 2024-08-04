@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 	<title>Insert title here</title>
@@ -59,7 +60,8 @@
 					
 					<!-- Not done: chua thuc hien add to cart -->
 					<!-- <button onClick="addToCart(${sanpham.id})" > -->
-					<span></span>Giỏ hàng</button>
+					<span></span>
+					<button th:onclick="'addToCart('+${sanPham.id}+')'" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart pull-center"></span> Giỏ hàng</button>
 					<h3></h3>
 				</div>
 				

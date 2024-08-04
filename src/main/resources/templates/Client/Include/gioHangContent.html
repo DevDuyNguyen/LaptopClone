@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div id="gioHangContent" th:fragment="gioHangContent">
+		<div class="container">
+			  <div class="row">
+			  	<h2 style="">  QUẢN LÝ GIỎ HÀNG</h2> <br>
+				  <div class="col-10">
+					  <table  >
+						 <tr>
+								<td>STT</td>
+								<td>Ảnh</td>
+								<td>Thông tin sản phẩm</td>
+								<td>Đơn giá</td>
+								<td>Số lượng</td>
+								<td>Tổng</td>
+								<td>Xóa</td>
+						</tr>
+						<div th:each="sanPhamAndSoLuong,iterStatus:${sanPhamAndSoLuongs}">			
+							<tr class="cart_line" th:id="'sanpham_info'+${sanPhamAndSoLuong.sanPham.id}">
+									<div>
+									<td th:text="${iterStatus.count}"></td>
+									<td><img src="" style="width: 150px" class="cart-img"></td>
+									<td style="text-align: center; mergin-top: -52px;">
+										<p class="cart_ten"><a th:href="@{/sp}+'?id='+${sanPhamAndSoLuong.sanPham.id}" th:text="${sanPhamAndSoLuong.sanPham.tenSanPham}"></a></p>
+										<p class="cart_masanpham">Mã sản phẩm : <span th:text="${sanPhamAndSoLuong.sanPham.id}"></span></p>
+										<p class="">Bảo hành : <span th:text="${sanPhamAndSoLuong.sanPham.thongTinBaoHanh}"></span></p>
+									</td>
+									<td class="covertPriceProduct" th:text="${sanPhamAndSoLuong.sanPham.donGia}"></td>
+									<td>
+									<!-- ajax function: changeQuanity(${sanpham.id},this.value,${sanpham.donGia}) -->
+										<input 
+											th:data-sp_id="${sanPhamAndSoLuong.sanPham.id}"
+											th:data-sp_donGia="${sanPhamAndSoLuong.sanPham.donGia}"
+											class="input_num_cart" type="number" th:value="${sanPhamAndSoLuong.soLuong}" min="1" 
+											onChange="changeQuanity(this)"
+										>
+										
+									</td>
+									<td><b><span class="sanpham_total" th:id="'sanpham'+${sanPhamAndSoLuong.sanPham.id}" th:text="${sanPhamAndSoLuong.sanPham.donGia * sanPhamAndSoLuong.soLuong}" th:data-total="${sanPhamAndSoLuong.sanPham.donGia * sanPhamAndSoLuong.soLuong}"></span> VND</b></td>
+									<td class="cart-img">
+									<!-- ajax funciton: deleteFromCart(${sanpham.id}) -->
+										<a class="btn btn-danger" th:data-sp_id="${sanPhamAndSoLuong.sanPham.id}" onClick="deleteFromCart(this)"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+									</div>
+								
+							</tr>
+						</div>
+						<tr>
+							<div th:if="${isCartEmpty}">
+								<td colspan="3">
+								<a class="btn btn-primary" th:href="@{/home}"><span class="glyphicon glyphicon-hand-left"></span> Mua thêm sản phẩm khác</a>
+								
+								<a class="btn btn-warning " th:href="@{/checkout}"><span class="glyphicon glyphicon-check"></span> Thanh toán</a>
+								</td>
+							</div>
+								
+							<div th:unless="${isCartEmpty}">
+								<td colspan="3">
+								<a class="btn btn-primary"  th:href="@{/home}">Mua thêm sản phẩm khác</a>
+								</td>
+							</div>
+								
+								
+							<td colspan="4">
+								<p class="cart_tongdonhang">Tổng giá trị đơn hàng : <span id="ordertotal"></span> VND</p>
+							</td>
+						</tr>
+					
+					</table>
+				  
+				</div>  
+			  
+		</div>
+
+
+	</div>
+
+</body>
+</html>

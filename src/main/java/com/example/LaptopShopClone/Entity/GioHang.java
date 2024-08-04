@@ -33,16 +33,45 @@ public class GioHang {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GioHang(long id, String tong_tien) {
-		super();
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getTong_tien() {
+		return tong_tien;
+	}
+
+	public void setTong_tien(String tong_tien) {
 		this.tong_tien = tong_tien;
+	}
+
+	public NguoiDung getNguoiDung() {
+		return nguoiDung;
+	}
+
+	public void setNguoiDung(NguoiDung nguoiDung) {
+		this.nguoiDung = nguoiDung;
+	}
+
+	public List<ChiMucGioHang> getChiMucGioHangs() {
+		return chiMucGioHangs;
+	}
+
+	public void setChiMucGioHangs(List<ChiMucGioHang> chiMucGioHangs) {
+		this.chiMucGioHangs = chiMucGioHangs;
 	}
 
 	@Override
 	public String toString() {
-		return "GioHang [id=" + id + ", tong_tien=" + tong_tien + "]";
+		return "GioHang [id=" + id + ", tong_tien=" + tong_tien + ", nguoiDung=" + nguoiDung + ", chiMucGioHangs="
+				+ chiMucGioHangs + "]";
 	}
+
+	
 	
 	
 	

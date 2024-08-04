@@ -12,19 +12,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Entity.HangSanXuat;
+import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.ServiceImpl.SanPhamServiceImpl;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
 import com.example.LaptopShopClone.Utils.SearchSanPhamCriteria;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
+@SessionAttributes("loggedUser")
 public class ClientSearchController {
 	@Autowired 
 	SanPhamServiceImpl sanPhamServiceImpl;
 	
+	@ModelAttribute("loggedUser")
+	public NguoiDung getloggedUser(HttpServletRequest httpServletRequest) {
+		return (NguoiDung)httpServletRequest.getSession().getAttribute("loggedUser");
+	}
 	
 	
 	@GetMapping("/simpleSearch")

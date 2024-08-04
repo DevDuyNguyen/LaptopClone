@@ -121,7 +121,7 @@ public class SanPhamRepository {
 		Session session=sessionFactory.openSession();
 		Query sql=session.createNativeQuery("select * from sanpham where id= :id;", SanPham.class);
 		sql.setParameter("id", id);
-		SanPham sp=(SanPham)sql.getSingleResult();
+		SanPham sp=(SanPham)sql.uniqueResult();
 		
 		return sp;
 	}

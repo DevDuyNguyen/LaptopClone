@@ -50,50 +50,6 @@ public class NguoiDungRepository {
 		
 	}
 	
-//	public NguoiDung addNguoiDung(NguoiDung nguoiDung) {
-//		int rowCountAddNguoiDung=0;
-//		int rowCountSetRoleMember=0;
-//		try(
-//				Connection conn=this.ds.getConnection();
-//				PreparedStatement preparedStatement=conn.prepareStatement("INSERT into nguoidung(diachi, email, hoTen, password, soDienThoai) VALUES (?,?,?,?,?);", PreparedStatement.RETURN_GENERATED_KEYS);				
-//				PreparedStatement preparedStatement2=conn.prepareStatement("INSERT into nguoidung_vaitro VALUES(?,?);")
-//				){
-//			preparedStatement.setString(1, nguoiDung.getDiaChi());
-//			preparedStatement.setString(2, nguoiDung.getEmail());
-//			preparedStatement.setString(3, nguoiDung.getHoTen());
-//			preparedStatement.setString(4, nguoiDung.getPassword());
-//			preparedStatement.setString(5, nguoiDung.getSoDienThoai());
-//			
-//			rowCountAddNguoiDung=preparedStatement.executeUpdate();
-//			Long nguoiDungId=(long)-1;
-//			ResultSet resultSet=preparedStatement.getGeneratedKeys();
-//			if(resultSet.next()) {
-//				nguoiDungId=resultSet.getLong(1);
-//			}
-//			
-//			preparedStatement2.setLong(1, nguoiDungId);
-//			preparedStatement2.setInt(2, 2);
-//			rowCountSetRoleMember=preparedStatement2.executeUpdate();
-//			
-//			System.out.println("add nguoi dung");
-//			
-//			
-//			
-//			
-//			
-//		}
-//		catch (Exception e) {
-//			System.out.println("addNguoiDung has exception");
-//			e.printStackTrace();
-//			return null;
-//		}
-//		
-//		if(rowCountAddNguoiDung>0 && rowCountSetRoleMember>0)
-//			return nguoiDung;
-//		else {
-//			return null;
-//		}
-//	}
 	
 	public NguoiDung addNguoiDung(NguoiDung nguoiDung) {
 		SessionFactory sessionFactory=sessionFactoryUtil.getSessionFactory();
