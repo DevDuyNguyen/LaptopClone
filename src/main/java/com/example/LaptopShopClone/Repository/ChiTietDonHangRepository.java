@@ -1,5 +1,8 @@
 package com.example.LaptopShopClone.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.LaptopShopClone.Entity.ChiTietDonHang;
 import com.example.LaptopShopClone.Entity.DonHang;
+import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.Utils.SessionFactoryUtil;
 
@@ -44,5 +48,16 @@ public class ChiTietDonHangRepository {
 		return chiTietDonHang;
 		
 	}
+	
+	public List<ChiTietDonHang> getChiTietDonHangFromDonHang(DonHang donHang) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sql=session.createNativeQuery("select * from chitietdonhang where ma_don_hang=:ma_don_hang", DonHang.class);
+		sql.setParameter("ma_don_hang", donHang.getId());
+		
+		return sql.getResultList();
+		
+	}
+	
+	
 	
 }

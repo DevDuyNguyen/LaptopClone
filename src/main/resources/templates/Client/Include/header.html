@@ -31,6 +31,7 @@
 					<li th:unless="${loggedUser}"><a th:href="@{/login}" >Đăng nhập</a></li>
 					<li><a th:href="@{/gio-hang}"> <span>Giỏ hàng&nbsp;&nbsp;&nbsp;</span></a><span class="glyphicon glyphicon-shopping-cart"></span></li>
 					<li th:if="${loggedUser}"><a th:href="@{/logout}" >Đăng xuất</a></li>
+					<li th:if="${loggedUser}"><a th:href="@{/profile}" >Tài khoản</a></li>
 
 				</ul>
 			

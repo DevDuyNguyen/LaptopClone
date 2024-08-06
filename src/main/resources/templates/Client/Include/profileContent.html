@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="profileContent">
+		
+			<div class="container">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<br>
+						<p style="font-size: 20px">
+							<b>Thông tin tài khoản:</b>
+						</p>
+						<br>
+						<h3 style="line-height: 2;">
+							<span style="font-weight: bold">Họ tên </span> <span th:text="${loggedUser.hoTen}"></span></h3>
+						<h3 style="line-height: 2;">
+							<span style="font-weight: bold">Số điện thoại: </span> <span th:text="${loggedUser.soDienThoai}"></span></h3>
+						<h3 style="line-height: 2;">
+							<span style="font-weight: bold">Email:</span> <span th:text="${loggedUser.email}"></span></h3>
+						<h3 style="line-height: 2;">
+							<span style="font-weight: bold"> Địa chỉ: </span> <span th:text="${loggedUser.email}"></span></h3>
+						<br> 
+						<a class="btn btn-primary" data-toggle="modal" data-target="#modalInformation">Cập nhật thông tin cá nhân</a>
+
+						<a class="btn btn-danger" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a> <br> <br>
+						<br>
+						<h3>
+							<b>Lịch sử mua hàng:</b>
+						</h3>
+						<br>
+						<table class="table-cart-checkout mytable">
+							<tr>
+								<th>Mã đơn hàng</th>
+								<th>Ngày mua</th>
+								<th>Ngày giao hàng</th>
+								<th>Ngày nhận hàng</th>
+								<th>Sản phẩm</th>
+								<th>Tổng tiền</th>
+								<th>Trạng thái đơn hàng</th>
+							</tr>
+		
+							<div th:each="donHang:${donHangList}">
+								<tr style="text-align: center;">
+									<td th:text="${donHang.id}"></td>
+									<td th:text="${donHang.ngayDatHang}"></td>
+		
+									<td th:text="${donHang.ngayGiaoHang}"></td>
+		
+									<td th:text="${donHang.ngayNhanHang}"></td>
+		
+									<c:set var="tongGiaTri"
+										value="${tongGiaTri + chiTiet.soLuongNhanHang*chiTiet.donGia}" /> 
+									<td>
+										<div th:each="chiTietDonHang:${donHang.danhSachChiTiet}">
+												<p>
+													<a th:href="@{/sp?id=chiTietDonHang.sanPham.id}" th:text="${chiTietDonHang.sanPham.tenSanPham}"></a><br>
+												</p>
+
+										</div>
+									</td>
+		
+									<td class="tongGiaTri" th:text="${#aggregates.sum(donHang.danhSachChiTiet.donGia)}"></td>
+									<td th:text="${OrderTotal}"></td>
+								</tr>
+							</div>
+						</table>
+		
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>
