@@ -51,7 +51,7 @@ public class ChiTietDonHangRepository {
 	
 	public List<ChiTietDonHang> getChiTietDonHangFromDonHang(DonHang donHang) {
 		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
-		Query sql=session.createNativeQuery("select * from chitietdonhang where ma_don_hang=:ma_don_hang", DonHang.class);
+		Query sql=session.createNativeQuery("select * from chitietdonhang where ma_don_hang=:ma_don_hang", ChiTietDonHang.class);
 		sql.setParameter("ma_don_hang", donHang.getId());
 		
 		return sql.getResultList();

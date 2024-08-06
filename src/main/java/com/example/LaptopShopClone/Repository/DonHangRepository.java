@@ -35,18 +35,39 @@ public class DonHangRepository {
 		return donHang;
 	}
 	
-	public List<ChiTietDonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit){
-		List<ChiTietDonHang> chiTietDonHangs=null;
+	public List<DonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit){
+		List<DonHang> donHangs=null;
 		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
-		Query sql=session.createNativeQuery("Select * from donhang where ma_nguoi_dat=:ma_nguoi_dat LIMIT :limit OFFSET :offset;", ChiTietDonHang.class);
+		Query sql=session.createNativeQuery("Select * from donhang where ma_nguoi_dat=:ma_nguoi_dat LIMIT :limit OFFSET :offset;", DonHang.class);
 		
 		sql.setParameter("ma_nguoi_dat", nguoiDung.getId());
 		sql.setParameter("limit", limit);
 		sql.setParameter("offset", offset);	
 		
+		donHangs=sql.getResultList();
+		
+		return donHangs;
+	}
+	
+	public List<DonHang> getAllDonHangByNguoiDung(NguoiDung nguoiDung){
+		List<DonHang> chiTietDonHangs=null;
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sql=session.createNativeQuery("Select * from donhang where ma_nguoi_dat=:ma_nguoi_dat", DonHang.class);
+		
+		sql.setParameter("ma_nguoi_dat", nguoiDung.getId());
 		chiTietDonHangs=sql.getResultList();
 		
 		return chiTietDonHangs;
+	}
+	
+	public DonHang getDonHangByID(long id) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sql=session.createNativeQuery("select * from donhang where id=:id", DonHang.class);
+		
+		sql.setParameter("id", id);
+		
+		return (DonHang)sql.uniqueResult();
+		
 	}
 	
 }

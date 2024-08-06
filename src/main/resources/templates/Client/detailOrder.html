@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:replace="Client/Include/header :: header"></div>
+	
+	<div id="orderDetailContent">
+		<div class="container">
+			  <div class="row">
+			  	<h2 style=""> CHI TIẾT ĐƠN HÀNG: <span th:text="${donHang.id}"></span> </h2> <br>
+				  <div class="col-10">
+					  <table  >
+						 <tr>
+								<td>STT</td>
+								<td>Ảnh</td>
+								<td>Thông tin sản phẩm</td>
+								<td>Đơn giá</td>
+								<td>Số lượng</td>
+								<td>Tổng</td>
+								<td>Xóa</td>
+						</tr>
+						<div th:each="chiTietDonHang,iterStatus:${donHang.danhSachChiTiet}">			
+							<tr class="cart_line" th:id="'sanpham_info'+${chiTietDonHang.sanPham.id}">
+									<div>
+										<td th:text="${iterStatus.count}"></td>
+										<!-- not done: chua thiet ke anh -->
+										<td><img src="" style="width: 150px" class="cart-img"></td>
+										<td style="text-align: center; mergin-top: -52px;">
+											<p class="cart_ten"><a th:href="@{/sp}+'?id='+${chiTietDonHang.sanPham.id}" th:text="${chiTietDonHang.sanPham.tenSanPham}"></a></p>
+											<p class="cart_masanpham">Mã sản phẩm : <span th:text="${chiTietDonHang.sanPham.id}"></span></p>
+											<p class="">Bảo hành : <span th:text="${chiTietDonHang.sanPham.thongTinBaoHanh}"></span></p>
+										</td>
+										<td class="covertPriceProduct" th:text="${chiTietDonHang.sanPham.donGia}"></td>
+										<td>
+											<input class="input_num_cart" type="number" th:value="${chiTietDonHang.soLuongDat}" disabled>
+											
+										</td>
+										<td><b><span class="sanpham_total" th:id="'sanpham'+${chiTietDonHang.sanPham.id}" th:text="${chiTietDonHang.sanPham.donGia * chiTietDonHang.soLuongDat}" th:data-total="${chiTietDonHang.sanPham.donGia * chiTietDonHang.soLuongDat}"></span> VND</b></td>
+									</div>
+								
+							</tr>
+						</div>
+						<tr>	
+							<td colspan="4">
+								<p class="cart_tongdonhang">Tổng giá trị đơn hàng : <span id="ordertotal"></span> VND</p>
+							</td>
+						</tr>
+					
+					</table>
+				  
+				</div>  
+			  
+		</div>
+
+
+	</div>
+
+	
+	
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.example.LaptopShopClone.ServiceImpl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +24,13 @@ public class DonHangServiceImpl implements DonHangService{
 		return this.donHangRepository.saveOrUpdate(donHang);
 	}
 	
-	public List<ChiTietDonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit){
+	public List<DonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit){
 		return this.donHangRepository.getDonHangByNguoiDung(nguoiDung, offset, limit);
 	}
 	
-	public int getSoLuongDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit) {
-		List<ChiTietDonHang> chiTietDonHangs=this.getDonHangByNguoiDung(nguoiDung, offset, limit);
-		return chiTietDonHangs.size();
+	public int getSoLuongDonHangByNguoiDung(NguoiDung nguoiDung) {
+		List<DonHang> donHangs=this.donHangRepository.getAllDonHangByNguoiDung(nguoiDung);
+		return donHangs.size();
 	}
 	
 	public long getOrderTotal(DonHang donHang) {
@@ -40,5 +41,9 @@ public class DonHangServiceImpl implements DonHangService{
 		}
 		
 		return result;
+	}
+	
+	public DonHang getDonHangById(long id) {
+		return this.donHangRepository.getDonHangByID(id);
 	}
 }

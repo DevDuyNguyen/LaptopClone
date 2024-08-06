@@ -9,9 +9,10 @@ import com.example.LaptopShopClone.Entity.NguoiDung;
 public interface DonHangService {
 	DonHang SaveOrUpdate(DonHang donHang);
 	
-	int getSoLuongDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit);
-	
-	List<ChiTietDonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit);
+	List<DonHang> getDonHangByNguoiDung(NguoiDung nguoiDung, int offset, int limit);
+	int getSoLuongDonHangByNguoiDung(NguoiDung nguoiDung);
 	
 	long getOrderTotal(DonHang donHang);
+	
+	DonHang getDonHangById(long id);
 }
