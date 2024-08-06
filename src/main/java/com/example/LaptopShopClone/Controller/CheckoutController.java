@@ -24,6 +24,7 @@ import com.example.LaptopShopClone.ServiceInterface.ChiMucGioHangService;
 import com.example.LaptopShopClone.ServiceInterface.ChiTietDonHangService;
 import com.example.LaptopShopClone.ServiceInterface.DonHangService;
 import com.example.LaptopShopClone.ServiceInterface.GioHangService;
+import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -40,6 +41,8 @@ public class CheckoutController {
 	ChiTietDonHangService chiTietDonHangService;
 	@Autowired 
 	ChiMucGioHangService chiMucGioHangService;
+	@Autowired
+	SanPhamService sanPhamService;
 	
 	
 	@ModelAttribute("loggedUser")
@@ -135,26 +138,31 @@ public class CheckoutController {
 		donHang.setTrangThaiDonHang("Đang chờ xử lý");
 		donHang=this.donHangService.SaveOrUpdate(donHang);
 		
+		List<ChiTietDonHang> chiTietDonHangList=new ArrayList<ChiTietDonHang>();
+		List<SanPham> sanPhamList=new ArrayList<SanPham>();
+		
 		//tao chitietdonhang tu chimucgiohang
 		for(ChiMucGioHang chiMucGioHang: chiMucGioHangList) {
 			ChiTietDonHang chiTietDonHang=new ChiTietDonHang();
 			chiTietDonHang.setDonHang(donHang);
 			chiTietDonHang.setSanPham(chiMucGioHang.getSanPham());
+			sanPhamList.add(this.sanPhamService.getSanPhamByID(chiMucGioHang.getSanPham().getId()));
 			chiTietDonHang.setSoLuongDat(chiMucGioHang.getSo_luong());
 			chiTietDonHang.setDonGia(chiMucGioHang.getSanPham().getDonGia()*chiMucGioHang.getSo_luong());
 			this.chiTietDonHangService.SaveOrUpdate(chiTietDonHang);
+			chiTietDonHangList.add(chiTietDonHang);
 			
 		}
 		
+		//xoa chi muc gio hang
 		for(ChiMucGioHang chiMucGioHang: chiMucGioHangList) {
 			this.chiMucGioHangService.remove(chiMucGioHang);
 			
 		}
 		
-		
-		//xoa chi muc 
-		
-		
+		model.addAttribute("donHang", donHang);
+		model.addAttribute("chiTietDonHangList", chiTietDonHangList);
+		model.addAttribute("sanPhamList", sanPhamList);
 		
 		
 		
