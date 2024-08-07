@@ -7,4 +7,6 @@ public interface NguoiDungService {
 	
 	NguoiDung saveUserForMember(NguoiDung nd);// nho xet vai tro la member
 	
+	public NguoiDung SaveOrUpdate(NguoiDung nguoiDung);
+	
 }

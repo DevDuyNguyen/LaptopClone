@@ -70,23 +70,23 @@ public class NguoiDungRepository {
 		
 	}
 	
-	public void test() throws Exception{
-		Connection conn=this.ds.getConnection();
-
-
-		PreparedStatement pst1=conn.prepareStatement("select * from nguoi_dung;");
-
-		ResultSet res=pst1.executeQuery();
-
-		
-		res.next();
-		ResultSetMetaData rsmd=res.getMetaData();
-		int columnCount=rsmd.getColumnCount();
-		for(int i=1; i<=columnCount; ++i) {
-			System.out.print(res.getString(i)+"|");
+	public NguoiDung SaveOrUpdate(NguoiDung nguoiDung) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
+		NguoiDung nguoiDung2=this.getNguoiDungByEmail(nguoiDung.getEmail());
+		if(nguoiDung2==null) {
+			session.persist(nguoiDung);
+		}
+		else {
+			nguoiDung.setId(nguoiDung2.getId());
+			session.merge(nguoiDung);
 		}
 		
+		transaction.commit();
 		
+		return nguoiDung;
 	}
+	
+
 	
 }

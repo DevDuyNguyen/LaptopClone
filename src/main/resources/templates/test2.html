@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-<h2>Redirect to a Webpage</h2>
-<p>The replace() method replaces the current document with a new one:</p>
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
 
-<button onclick="myFunction()">Replace document</button>
+
+</style>
+</head>
+<body style="text-align:center">
+
+<h2>Popup</h2>
+
+<div class="popup" onclick="myFunction()">Click me to toggle the popup!
+  <span class="popuptext" id="myPopup">A Simple Popup!</span>
+</div>
 
 <script>
+// When the user clicks on div, open the popup
 function myFunction() {
-  let a=document.createElement("a");
-  a.setAttribute("href","https://www.w3schools.com/howto/howto_js_redirect_webpage.asp");
-  a.click();
-  
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
 }
 </script>
 
 </body>
-</html> 
+</html>

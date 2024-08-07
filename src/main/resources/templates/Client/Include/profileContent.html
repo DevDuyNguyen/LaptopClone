@@ -26,9 +26,9 @@
 						<h3 style="line-height: 2;">
 							<span style="font-weight: bold"> Địa chỉ: </span> <span th:text="${loggedUser.email}"></span></h3>
 						<br> 
-						<a class="btn btn-primary" data-toggle="modal" data-target="#modalInformation">Cập nhật thông tin cá nhân</a>
+						<button class="btn btn-primary" data-modal-target="modal-information">Cập nhật thông tin cá nhân</button>
 
-						<a class="btn btn-danger" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a> <br> <br>
+						<button class="btn btn-danger" data-modal-target="modal-password">Đổi mật khẩu</button> <br> <br>
 						<br>
 						<h3>
 							<b>Lịch sử mua hàng:</b>
@@ -88,12 +88,59 @@
 			</div>
 		</div>
 		
+		<!-- modal cap nhat thong tin tai khoan -->
+		
+		<div id="modal-information" class="modal">
+			<div class="modal-header">
+				<h5 class="modal-title">
+					<b>Cập nhật thông tin tài khoản</b>
+				</h5>
+				<button type="button" class="modal-close-button">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+	
+			<div class="modal-body">
+				<div class="form-group ">
+					<label style="line-height: 2">Họ tên khách hàng*:</label><br>
+					<label id="nameWarning" style="color: red"></label> 
+					<input
+						class="form-control" id="name" name="name" type="text"
+						th:value="${loggedUser.hoTen}">
+				</div>
+				<div class="form-group ">
+					<label style="line-height: 2">Số điện thoại*:</label><br> 
+					<label id="phoneWarning" style="color: red"></label> 
+					<input
+						class="form-control" id="phone" name="phone" type="text"
+						th:value="${loggedUser.soDienThoai}">
+				</div>
+				<div class="form-group">
+					<label style="line-height: 2">Địa chỉ*:</label><br> 
+					<label id="addressWarning" style="color: red"></label>
+					<textarea rows="3" cols="1" class="form-control" id="address" th:text="${loggedUser.diaChi}"></textarea>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="changeInformation()">Cập nhật</button>
+			</div>
+			
+		</div>
+		
+		<div id="overlay"></div>
+		
+		
+		
 		<script>
 			function OrderDetail(orderID){
 				let a=document.getElementById("detailOrder"+orderID);
 			  a.click();
 			}
 		</script>
+		
+		<script src="/js/updateProfile.js"></script>
+		<script src="/js/updatePassword.js"></script>
 		
 	</div>
 	

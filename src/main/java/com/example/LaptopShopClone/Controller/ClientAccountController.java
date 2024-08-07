@@ -2,13 +2,19 @@ package com.example.LaptopShopClone.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.LaptopShopClone.Entity.ChiTietDonHang;
@@ -16,6 +22,9 @@ import com.example.LaptopShopClone.Entity.DonHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.ServiceInterface.ChiTietDonHangService;
 import com.example.LaptopShopClone.ServiceInterface.DonHangService;
+import com.example.LaptopShopClone.ServiceInterface.NguoiDungService;
+import com.example.LaptopShopClone.Utils.ResponseObject;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -25,6 +34,9 @@ public class ClientAccountController {
 
 	@Autowired 
 	DonHangService donHangService;
+	
+	@Autowired
+	NguoiDungService nguoiDungService;
 	
 	@ModelAttribute("loggedUser")
 	public NguoiDung getLoggedUser(HttpServletRequest httpServletRequest) {
@@ -88,6 +100,47 @@ public class ClientAccountController {
 	}
 	
 	
+	@GetMapping("/updateProfile")
+	@ResponseBody
+	public ResponseEntity<ResponseObject> updateProfile(Model model, 
+			@ModelAttribute("loggedUser") NguoiDung nguoiDung, 
+			@RequestParam("name") String name,
+			@RequestParam("phone") String phone,
+			@RequestParam("address") String address) {
+		
+		
+		ResponseEntity<ResponseObject> re=null;
+		ResponseObject ro=new ResponseObject();
+		
+		if(nguoiDung==null) {
+			return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header("Location", "/login").body(null);
+		}
+		
+		Pattern pattern=Pattern.compile("^\\d{10}$");
+		Matcher matcher=pattern.matcher(phone);
+		if(!matcher.matches()) {
+			ro.getErrors().add("Số điện thoại không phù hợp");
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+		
+		if(!name.equals("") || name!=null) {
+			nguoiDung.setHoTen(name);
+		}
+		if(!phone.equals("") || phone!=null) {
+			nguoiDung.setSoDienThoai(phone);
+		}
+		if(!address.equals("") || address!=null) {
+			nguoiDung.setDiaChi(address);
+		}
+		
+		this.nguoiDungService.SaveOrUpdate(nguoiDung);
+		ro.setStatus("success");
+		re=ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		
+		return re;
+		
+	}
 	
 	
 	

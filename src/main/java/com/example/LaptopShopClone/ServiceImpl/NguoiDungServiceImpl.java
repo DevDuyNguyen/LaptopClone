@@ -27,4 +27,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		return this.nguoiDungRepository.addNguoiDung(nguoiDung);
 	}
 	
+	public NguoiDung SaveOrUpdate(NguoiDung nguoiDung) {
+		return this.nguoiDungRepository.SaveOrUpdate(nguoiDung);
+	}
+	
 }

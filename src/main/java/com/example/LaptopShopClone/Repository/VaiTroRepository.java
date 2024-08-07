@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
 import com.example.LaptopShopClone.Utils.SessionFactoryUtil;
 
@@ -39,8 +40,7 @@ public class VaiTroRepository {
 		
 	}
 	
-	//addVaitro
-	//updateVaitro
+
 	
 	
 }
