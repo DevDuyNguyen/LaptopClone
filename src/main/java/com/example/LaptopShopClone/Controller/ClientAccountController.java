@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -139,6 +140,51 @@ public class ClientAccountController {
 		re=ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
 		
 		return re;
+		
+	}
+	
+	@PostMapping("/updatePassword")
+	@ResponseBody
+	public ResponseEntity<ResponseObject> updatePassword(@ModelAttribute("loggedUser") NguoiDung nguoiDung,
+			@RequestParam("old-password") String oldPassword,
+			@RequestParam("new-password") String newPassword,
+			@RequestParam("re-new-password") String reNewPassword
+			){
+		ResponseObject ro=new ResponseObject();
+		
+		if(nguoiDung==null) {
+			return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header("Location", "/login").body(null);
+		}
+		
+		if(!nguoiDung.getPassword().equals(oldPassword)) {
+			ro.getErrors().add("Mật khẩu không chính xác");
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+		if(newPassword.equals("") || newPassword==null) {
+			ro.getErrors().add("Mật khẩu mới không được để trống");
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+		if(reNewPassword.equals("") || reNewPassword==null) {
+			ro.getErrors().add("Nhập lại mật khẩu mới không được để trống");
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+			
+		if(!newPassword.equals(reNewPassword)) {
+			ro.getErrors().add("Mật khẩu mới không đồng bộ");
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+		
+		nguoiDung.setPassword(newPassword);
+		this.nguoiDungService.SaveOrUpdate(nguoiDung);
+		
+		ro.setStatus("success");
+		
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		
 		
 	}
 	
