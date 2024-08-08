@@ -2,6 +2,7 @@
 
 function addToCart(sp_id){
 	let xhr=new XMLHttpRequest();
+	console.log("asfadf");
 	xhr.open("GET", "/api/gio-hang/addToCart?sp_id="+sp_id, true);
 	
 	xhr.onload=function(e){
