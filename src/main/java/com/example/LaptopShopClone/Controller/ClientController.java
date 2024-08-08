@@ -242,7 +242,7 @@ public class ClientController {
 	
 	//danhMucID
 	@GetMapping("/danhMuc")
-	public String getDanhMuc(@RequestParam("danhMuc") String danhMuc) {
+	public String getDanhMuc(@RequestParam("danhMuc") Long danhMuc) {
 		
 		return "redirect:/simpleSearch?tenSanPham=&danhMuc="+danhMuc;
 	}

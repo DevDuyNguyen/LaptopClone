@@ -13,7 +13,7 @@
 				<ul id="danhmuc">
 					
 					<div th:each="danhMuc:${danhMucList}">	
-						<li><a th:href="@{/danhMuc(danhMuc=${danhMuc.tenDanhMuc})}"><span style=" font-size: 16px; font-weight: 900; " th:text="${danhMuc.tenDanhMuc}"></span></a></li>
+						<li><a th:href="@{/danhMuc(danhMuc=${danhMuc.id})}"><span style=" font-size: 16px; font-weight: 900; " th:text="${danhMuc.tenDanhMuc}"></span></a></li>
 					</div>	
 				</ul>
 		</div>
