@@ -7,7 +7,7 @@ public class SearchSanPhamCriteria {
 	private String sort;
 	private int minValue;
 	private long maxValue;
-	private String danhMuc;
+	private long danhMuc;
 	private String hsx;
 	
 	
@@ -36,10 +36,10 @@ public class SearchSanPhamCriteria {
 	public void setMaxValue(long maxValue) {
 		this.maxValue = maxValue;
 	}
-	public String getDanhMuc() {
+	public long getDanhMuc() {
 		return danhMuc;
 	}
-	public void setDanhMuc(String danhMuc) {
+	public void setDanhMuc(Long danhMuc) {
 		this.danhMuc = danhMuc;
 	}
 	public String getHsx() {

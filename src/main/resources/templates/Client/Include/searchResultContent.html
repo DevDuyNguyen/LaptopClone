@@ -102,8 +102,8 @@
         					<select name="danhMuc" class="form-control" th:value="${danhMuc}">
         						<option value="">Tất cả danh mục</option>
         						<div th:each="brand: ${danhMucList}">
-        							<option th:if="${brand.tenDanhMuc==danhMuc}" th:value="${brand.tenDanhMuc}" th:text="${brand.tenDanhMuc}" selected></option>
-        							<option th:unless="${brand.tenDanhMuc==danhMuc}" th:value="${brand.tenDanhMuc}" th:text="${brand.tenDanhMuc}"></option>
+        							<option th:if="${brand.tenDanhMuc==danhMuc}" th:value="${brand.id}" th:text="${brand.tenDanhMuc}" selected></option>
+        							<option th:unless="${brand.tenDanhMuc==danhMuc}" th:value="${brand.id}" th:text="${brand.tenDanhMuc}"></option>
         						</div>					
         					</select>
         				</div>

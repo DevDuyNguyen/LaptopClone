@@ -18,7 +18,6 @@ import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Entity.HangSanXuat;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.SanPham;
-import com.example.LaptopShopClone.ServiceImpl.SanPhamServiceImpl;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
 import com.example.LaptopShopClone.Utils.SearchSanPhamCriteria;
 
@@ -28,7 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @SessionAttributes("loggedUser")
 public class ClientSearchController {
 	@Autowired 
-	SanPhamServiceImpl sanPhamServiceImpl;
+	SanPhamService sanPhamService;
 	
 	@ModelAttribute("loggedUser")
 	public NguoiDung getloggedUser(HttpServletRequest httpServletRequest) {
@@ -42,7 +41,7 @@ public class ClientSearchController {
 			@RequestParam(name = "sort", defaultValue = "") String sort,
 			@RequestParam(name = "minValue", defaultValue = "0") int minValue,
 			@RequestParam(name = "maxValue", defaultValue = "-1") long maxValue,
-			@RequestParam(name = "danhMuc", defaultValue = "") String danhMuc,
+			@RequestParam(name = "danhMuc", defaultValue = "-1") long danhMuc,
 			@RequestParam(name="hsx", defaultValue = "") String hsx,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			Model model
@@ -59,19 +58,19 @@ public class ClientSearchController {
 		
 		int resultPerPage=4;
 		int PaginationPerPage=4;
-		List<SanPham> resultList=sanPhamServiceImpl.searchSanPham(searchSanPhamCriteria, page, resultPerPage);
+		List<SanPham> resultList=sanPhamService.searchSanPham(searchSanPhamCriteria, page, resultPerPage);
 		List<Integer> pageList=new ArrayList<Integer>();
-		int totalCount=this.sanPhamServiceImpl.getTotalResultCount(searchSanPhamCriteria);
+		int totalCount=this.sanPhamService.getTotalResultCount(searchSanPhamCriteria);
 		int totalPage=(int) Math.ceil((double)totalCount/resultPerPage);//luon luon can than auto casting
 		
-		Set<DanhMuc> danhMucList=new HashSet<DanhMuc>();
+		Set<DanhMuc> danhMucList=this.sanPhamService.getAllDanhMucFromsearchSanPham(searchSanPhamCriteria);
 		Set<HangSanXuat> hangSanXuatList=new HashSet<HangSanXuat>();
 		
-		for(SanPham sp:resultList) {
-			danhMucList.add(sp.getDanhMuc());
-			hangSanXuatList.add(sp.getHangSanXuat());
-			System.out.println(sp);
-		}
+//		for(SanPham sp:resultList) {
+//			danhMucList.add(sp.getDanhMuc());
+//			hangSanXuatList.add(sp.getHangSanXuat());
+//			System.out.println(sp);
+//		}
 
 		
 		if(page==1||page==2||page==3||page==4) {

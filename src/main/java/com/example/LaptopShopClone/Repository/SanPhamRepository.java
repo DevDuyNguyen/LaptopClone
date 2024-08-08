@@ -28,7 +28,7 @@ public class SanPhamRepository {
 		String keyword[]=searchSanPhamCriteria.getKeyWord();
 		int minValue=searchSanPhamCriteria.getMinValue();
 		long maxValue=searchSanPhamCriteria.getMaxValue();
-		String danhMuc=searchSanPhamCriteria.getDanhMuc();
+		long danhMuc=searchSanPhamCriteria.getDanhMuc();
 		String hsx=searchSanPhamCriteria.getHsx();
 		String sort=searchSanPhamCriteria.getSort();
 		
@@ -53,8 +53,8 @@ public class SanPhamRepository {
 			sql+=" AND sp.donGia<="+maxValue;
 		}
 		
-		if(!danhMuc.equals("")) {
-			sql+=" AND tenDanhMuc='"+danhMuc+"'";
+		if(danhMuc!=-1) {
+			sql+=" AND danhmuc.id='"+danhMuc+"'";
 		}
 		
 		if(!hsx.equals("")) {

@@ -1,10 +1,14 @@
 package com.example.LaptopShopClone.ServiceImpl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.Repository.SanPhamRepository;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
@@ -29,6 +33,17 @@ public class SanPhamServiceImpl implements SanPhamService{
 	
 	public SanPham getSanPhamByID(long id) {
 		return this.sanPhamRepository.getSanPhamByID(id);
+	}
+	
+	public Set<DanhMuc> getAllDanhMucFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria){
+		Set<DanhMuc> danhMucs=new HashSet<DanhMuc>();
+		List<SanPham> sanPhams=sanPhamRepository.searchSanPhamByCriteria(searchSanPhamCriteria);
+		
+		for(SanPham sp: sanPhams) {
+			danhMucs.add(sp.getDanhMuc());
+		}
+		
+		return danhMucs;
 	}
 	
 	

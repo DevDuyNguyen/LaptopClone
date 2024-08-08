@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Entity.GioHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.SanPham;
+import com.example.LaptopShopClone.ServiceImpl.DanhMucService;
 import com.example.LaptopShopClone.ServiceImpl.Validation;
 import com.example.LaptopShopClone.ServiceInterface.GioHangService;
 import com.example.LaptopShopClone.ServiceInterface.NguoiDungService;
@@ -38,6 +40,8 @@ public class ClientController {
 	SanPhamService sanPhamService;
 	@Autowired
 	GioHangService gioaHangService;
+	@Autowired
+	DanhMucService danhMucService;
 	
 	@ModelAttribute("loggedUser")
 	public NguoiDung getLoggedUser(HttpServletRequest httpServletRequest) {
@@ -45,7 +49,11 @@ public class ClientController {
 	}
 	
 	@GetMapping("/home")
-	public String getHomePage() {
+	public String getHomePage(Model model) {
+		List<DanhMuc> danhMucList=this.danhMucService.getAllDanhMuc();
+		
+		model.addAttribute("danhMucList", danhMucList);
+		
 		return "/client/home";
 	}
 	
@@ -231,6 +239,14 @@ public class ClientController {
 		
 		return "redirect:/home";
 	}
+	
+	//danhMucID
+	@GetMapping("/danhMuc")
+	public String getDanhMuc(@RequestParam("danhMuc") String danhMuc) {
+		
+		return "redirect:/simpleSearch?tenSanPham=&danhMuc="+danhMuc;
+	}
+	
 	
 	@GetMapping("/sp")
 	public String xemChiTietSanPham(@RequestParam("id") long spID, Model model) {
