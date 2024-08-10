@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.LaptopShopClone.Entity.DanhMuc;
+import com.example.LaptopShopClone.Entity.HangSanXuat;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.Utils.SearchSanPhamCriteria;
 
@@ -12,5 +13,5 @@ public interface SanPhamService {
 	int getTotalResultCount(SearchSanPhamCriteria searchSanPhamCriteria);
 	SanPham getSanPhamByID(long id);
 	Set<DanhMuc> getAllDanhMucFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria);
-	
+	Set<HangSanXuat> getAllHSXFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria);
 }

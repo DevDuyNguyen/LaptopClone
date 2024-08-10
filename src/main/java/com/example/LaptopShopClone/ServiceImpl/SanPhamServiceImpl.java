@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.LaptopShopClone.Entity.DanhMuc;
+import com.example.LaptopShopClone.Entity.HangSanXuat;
 import com.example.LaptopShopClone.Entity.SanPham;
 import com.example.LaptopShopClone.Repository.SanPhamRepository;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;
@@ -44,6 +45,17 @@ public class SanPhamServiceImpl implements SanPhamService{
 		}
 		
 		return danhMucs;
+	}
+	
+	public Set<HangSanXuat> getAllHSXFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria){
+		Set<HangSanXuat> hangSanXuats=new HashSet<HangSanXuat>();
+		List<SanPham> sanPhams=sanPhamRepository.searchSanPhamByCriteria(searchSanPhamCriteria);
+		
+		for(SanPham sp: sanPhams) {
+			hangSanXuats.add(sp.getHangSanXuat());
+		}
+		
+		return hangSanXuats;
 	}
 	
 	

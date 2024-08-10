@@ -64,7 +64,7 @@ public class ClientSearchController {
 		int totalPage=(int) Math.ceil((double)totalCount/resultPerPage);//luon luon can than auto casting
 		
 		Set<DanhMuc> danhMucList=this.sanPhamService.getAllDanhMucFromsearchSanPham(searchSanPhamCriteria);
-		Set<HangSanXuat> hangSanXuatList=new HashSet<HangSanXuat>();
+		Set<HangSanXuat> hangSanXuatList=this.sanPhamService.getAllHSXFromsearchSanPham(searchSanPhamCriteria);
 		
 //		for(SanPham sp:resultList) {
 //			danhMucList.add(sp.getDanhMuc());
