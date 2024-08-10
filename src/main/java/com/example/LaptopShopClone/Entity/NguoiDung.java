@@ -21,8 +21,10 @@ public class NguoiDung {
 	
 	private String email;
 	private String password;
+	
 	@Transient
 	private String confirmPassword;
+	
 	private String hoTen;
 	private String soDienThoai;
 	private String diaChi;
