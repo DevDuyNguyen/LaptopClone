@@ -63,13 +63,13 @@ public class SanPhamRepository {
 		
 		if(!sort.equals("")) {
 			
-			if(sort.equals("Mới nhất")) {
+			if(sort.equals("newest")) {
 				sql+=" ORDER BY sp.id DESC";
 			}
-			else if(sort.equals("Giá tăng dần")) {
+			else if(sort.equals("priceAsc")) {
 				sql+=" ORDER BY sp.donGia ASC";
 			}
-			else if(sort.equals("Giá giảm dần")) {
+			else if(sort.equals("priceDes")) {
 				sql+=" ORDER BY sp.donGia DESC";
 			}
 		}

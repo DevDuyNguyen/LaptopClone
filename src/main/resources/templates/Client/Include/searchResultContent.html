@@ -20,13 +20,12 @@
 		<div class="sort_product">	
 			<form action="">
 				<input type="hidden" th:value="${tenSanPham}" name="tenSanPham"><!-- de cac tieu chi loc, search -->
-				<input type="hidden" th:value="${sort}" name="sort">
 				<input type="hidden" th:value="${minValue}" name="minValue">
 				<input type="hidden" th:value="${maxValue}" name="maxValue">
 				<input type="hidden" th:value="${danhMuc}" name="danhMuc">
 				<input type="hidden" th:value="${hsx}" name="hsx">
 				<div class="inline">
-					<select name="sort" class="form-control">
+					<select name="sort" class="form-control" th:value="${sort}">
 						<option value=""></option>
 						<option value="newest">Mới nhất</option>
 						<option value="priceAsc">Giá tăng dần</option>
