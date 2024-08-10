@@ -70,4 +70,13 @@ public class DonHangRepository {
 		
 	}
 	
+	public int soLuongDonHangByTrangThai(String trangThai) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sql=session.createNativeQuery("select count(*) from donhang where trangThaiDonHang=:trangThaiDonHang", DonHang.class);
+		sql.setParameter("trangThaiDonHang", trangThai);
+		
+		return (Integer)sql.uniqueResult();
+		
+	}
+	
 }

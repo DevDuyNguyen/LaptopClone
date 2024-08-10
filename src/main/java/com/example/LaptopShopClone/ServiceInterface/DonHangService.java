@@ -15,4 +15,6 @@ public interface DonHangService {
 	long getOrderTotal(DonHang donHang);
 	
 	DonHang getDonHangById(long id);
+	
+	int soLuongDonHangByTrangThai(String trangThai);
 }

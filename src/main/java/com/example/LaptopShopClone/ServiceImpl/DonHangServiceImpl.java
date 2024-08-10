@@ -46,4 +46,9 @@ public class DonHangServiceImpl implements DonHangService{
 	public DonHang getDonHangById(long id) {
 		return this.donHangRepository.getDonHangByID(id);
 	}
+	
+	public int soLuongDonHangByTrangThai(String trangThai) {
+		return this.donHangRepository.soLuongDonHangByTrangThai(trangThai);
+	}
+	
 }
