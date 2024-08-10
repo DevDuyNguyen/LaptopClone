@@ -10,13 +10,13 @@
 		<div th:if="${loggedUser}">
 			<p>is logged</p>
 			
-			<div th:if="${hasError}">
+			<div th:if="${#lists.size(errors)>0}">
 				<div th:each="error:${errors}">
 					 <h1 style="color: red" th:text="${error}"></h1>
 				</div>
 			</div>
 			
-			<div th:unless="${hasError}">
+			<div th:unless="${#lists.size(errors)>0}">
 				<form method="POST" th:action="@{/xulycheckout}">
 					<div class = "row">
 					<br><br>

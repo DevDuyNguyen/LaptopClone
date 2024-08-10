@@ -63,13 +63,15 @@ public class CheckoutController {
 		List<SanPhamAndSoLuong> sanPhamAndSoLuongs=new ArrayList<SanPhamAndSoLuong>();
 		Boolean isCartEmpty=true;
 		List<String> errors=new ArrayList<String>();
-		Boolean hasError=false;
+
 		
 		
 		if(chiMucGioHangList.size()==0) {
 			isCartEmpty=false;
 			errors.add("Giỏ hàng trống");
-			hasError=true;
+
+			model.addAttribute("nguoiDung", nguoiDung);
+			model.addAttribute("errors", errors);
 			return "Client/checkout";
 		}
 		
@@ -81,7 +83,7 @@ public class CheckoutController {
 		model.addAttribute("isCartEmpty", isCartEmpty);
 		model.addAttribute("nguoiDung", nguoiDung);
 		model.addAttribute("errors", errors);
-		model.addAttribute("hasError",hasError);
+
 		
 		
 		
