@@ -70,17 +70,20 @@
 							</div>
 						</table>
 						
-						<div class="pagination" th:unless="${currentPage==1}">
-							<a th:href="@{/profile(currentPage=${currentPage}-1)}">Back</a>
-						</div>
-
-						
-						<div class="pagination" th:each="page:${pageList}">
-							<a th:href="@{/profile(currentPage=${page})}" th:text="${page}"></a>
-						</div>
-						
-						<div class="pagination" th:unless="${currentPage==totalPage}">
-							<a th:href="@{/profile(currentPage=${currentPage}+1)}" >Next</a>
+						<div th:if="${#lists.size(pageList)>0}">
+							<div class="pagination" th:unless="${currentPage==1}">
+								<a th:href="@{/profile(currentPage=${currentPage}-1)}">Back</a>
+							</div>
+	
+							
+							<div class="pagination" th:each="page:${pageList}">
+								<a th:href="@{/profile(currentPage=${page})}" th:text="${page}"></a>
+							</div>
+							
+							<div class="pagination" th:unless="${currentPage==totalPage}">
+								<a th:href="@{/profile(currentPage=${currentPage}+1)}" >Next</a>
+							</div>
+							
 						</div>
 		
 					</div>
