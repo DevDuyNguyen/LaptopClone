@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.example.LaptopShopClone.Entity.ChiTietDonHang;
 import com.example.LaptopShopClone.Entity.DonHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
+import com.example.LaptopShopClone.Utils.SearchDonHangCriteria;
 import com.example.LaptopShopClone.Utils.SessionFactoryUtil;
 
 @Repository
@@ -77,6 +78,52 @@ public class DonHangRepository {
 		
 		
 		return (Integer)sql.uniqueResult();
+		
+	}
+	
+	public int getTotalNumberDonHang() {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sql=session.createNativeQuery("select count(*) from donhang;", Integer.class);
+		
+		return (Integer)sql.uniqueResult();
+	}
+	
+	public String generateSQLDonHangFromCriteria(SearchDonHangCriteria searchDonHangCriteria) {
+		 String sql="select * from donhang where 1";
+		 
+		 if(searchDonHangCriteria.getTrangThaiDonHang()!=null && !searchDonHangCriteria.getTrangThaiDonHang().equals("") && !searchDonHangCriteria.getTrangThaiDonHang().equals("Tất cả")) {
+			 sql+=" AND donhang.trangThaiDonHang"+searchDonHangCriteria.getTrangThaiDonHang();
+		 }
+		 
+		 if(searchDonHangCriteria.getStartDate()!=null) {
+			 sql+=" AND donhang.ngayDatHang>="+searchDonHangCriteria.getStartDate();
+		 }
+		 if(searchDonHangCriteria.getEndDate()!=null) {
+			 sql+=" AND donhang.ngayDatHang<="+searchDonHangCriteria.getEndDate();
+		 }
+		 if(searchDonHangCriteria.getId()!=0) {
+			 sql+=" AND donhang.id="+searchDonHangCriteria.getId();
+		 }
+		
+		 sql+=" ORDER BY donhang.id DESC";
+		 
+		 return sql;
+	 }
+	
+	public List<DonHang> getDonhangByCriteriaPageConstraint(SearchDonHangCriteria searchDonHangCriteria, int offset, int limit){
+		String sql=this.generateSQLDonHangFromCriteria(searchDonHangCriteria);
+		sql+=" LIMIT :limit OFFSET :offset";
+		
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sqlQuery=session.createNativeQuery(sql, DonHang.class);
+		sqlQuery.setParameter("limit", limit);
+		sqlQuery.setParameter("offset", offset);
+		
+		System.out.println("getDonhangByCriteriaPageConstraint:"+sql);
+		
+		return sqlQuery.getResultList();
+		
+		
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.LaptopShopClone.Entity.ChiTietDonHang;
 import com.example.LaptopShopClone.Entity.DonHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
+import com.example.LaptopShopClone.Utils.SearchDonHangCriteria;
 
 public interface DonHangService {
 	DonHang SaveOrUpdate(DonHang donHang);
@@ -17,4 +18,8 @@ public interface DonHangService {
 	DonHang getDonHangById(long id);
 	
 	int soLuongDonHangByTrangThai(String trangThai);
+	
+	int getTotalNumberDonHang();
+	
+	List<DonHang> getDonhangByCriteriaPageConstraint(SearchDonHangCriteria searchDonHangCriteria, int offset, int limit);
 }

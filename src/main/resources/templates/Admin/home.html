@@ -9,7 +9,7 @@
 		<div class="col-md-9 animated bounce">
 			<h3 class="page-header">Danh sách công việc</h3>
 			<div th:if="${soLuongDonHangMoi>0}">
-		         <p>Bạn có: <a th:href="@{/admin/don-hang}"><span th:text="${soLuongDonHangMoi}"></span> đơn hàng mới</a><p>
+		         <p>Bạn có: <a th:href="@{/admin/don-hang}"><span th:text="${soLuongDonHangMoi}"></span> đơn hàng đang chờ giao</a><p>
 		    </div>
 		    
 		    <div th:if="${soLuongDonHangCanPheDuyet>0}">

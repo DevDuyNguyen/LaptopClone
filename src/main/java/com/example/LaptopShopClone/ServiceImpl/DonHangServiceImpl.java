@@ -12,6 +12,7 @@ import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Repository.DonHangRepository;
 import com.example.LaptopShopClone.ServiceInterface.ChiTietDonHangService;
 import com.example.LaptopShopClone.ServiceInterface.DonHangService;
+import com.example.LaptopShopClone.Utils.SearchDonHangCriteria;
 
 @Service
 public class DonHangServiceImpl implements DonHangService{
@@ -49,6 +50,14 @@ public class DonHangServiceImpl implements DonHangService{
 	
 	public int soLuongDonHangByTrangThai(String trangThai) {
 		return this.donHangRepository.soLuongDonHangByTrangThai(trangThai);
+	}
+	
+	public 	int getTotalNumberDonHang() {
+		return this.donHangRepository.getTotalNumberDonHang();
+	}
+	
+	public List<DonHang> getDonhangByCriteriaPageConstraint(SearchDonHangCriteria searchDonHangCriteria, int offset, int limit){
+		return this.donHangRepository.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, offset, limit);
 	}
 	
 }

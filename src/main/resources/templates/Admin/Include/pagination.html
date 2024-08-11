@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="pagination">
+		<a th:unless="${currentPage==1}" th:href="@{url+requestParameters+'&currentPage='+currentPage-1}">Back</a>
+		
+		<div th:each="page:${pageList}">
+			
+			<a th:if="${currentPage==page}" th:href="@{url+requestParameters+'&currentPage='+page}" th:text="${page}" style="color:red"></a>
+			<a th:unless="${currentPage==page}" th:href="@{url+requestParameters+'&currentPage='+page}" th:text="${page}" style="color:red"></a>
+			
+		</div>
+		
+		<a th:unless="${currentPage==totalPage}" th:href="@{url+requestParameters+'&currentPage='+currentPage+1}">Next</a>
+		
+		
+	</div>
+
+</body>
+</html>

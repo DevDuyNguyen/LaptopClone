@@ -64,7 +64,7 @@ public class ClientAccountController {
 			}
 		}
 		else if(currentPage==totalPage) {
-			for(int i=currentPage-1; i>(totalPage-noPage) && i>0; --i) {
+			for(int i=currentPage; i>(totalPage-noPage) && i>0; --i) {
 				pageList.add(i);
 			}
 		}
