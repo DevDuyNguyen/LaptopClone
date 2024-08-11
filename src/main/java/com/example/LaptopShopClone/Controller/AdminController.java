@@ -20,6 +20,7 @@ import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
 import com.example.LaptopShopClone.ServiceInterface.DonHangService;
 import com.example.LaptopShopClone.ServiceInterface.VaiTroService;
+import com.example.LaptopShopClone.Utils.Pagination;
 import com.example.LaptopShopClone.Utils.SearchDonHangCriteria;
 import com.example.LaptopShopClone.Utils.Validation;
 
@@ -105,25 +106,29 @@ public class AdminController {
 			// TODO: handle exception
 		}
 		
-		List<Integer> pageList=new ArrayList<Integer>();
-		if(currentPage>=1 && currentPage<=5) {
-			for(int i=1; i<=noAllowedPage && i<=totalPage; ++i)
-				pageList.add(i);
-		}
-		else if(currentPage==totalPage) {
-			for(int i=currentPage; i>totalPage-noAllowedPage &&i>0; --i)
-				pageList.add(i);
-		}
-		else {
-			//left side
-			for(int i=1; i<=halfAllowedPage; ++i)
-				pageList.add(currentPage-i);
-			pageList.add(currentPage);
-			//right side
-			for(int i=1; i<=halfAllowedPage; ++i)
-				pageList.add(currentPage+i);
-			
-		}
+//		List<Integer> pageList=new ArrayList<Integer>();
+//		if(currentPage>=1 && currentPage<=5) {
+//			for(int i=1; i<=noAllowedPage && i<=totalPage; ++i)
+//				pageList.add(i);
+//		}
+//		else if(currentPage==totalPage) {
+//			for(int i=currentPage; i>totalPage-noAllowedPage &&i>0; --i)
+//				pageList.add(i);
+//		}
+//		else {
+//			//left side
+//			for(int i=1; i<=halfAllowedPage; ++i)
+//				pageList.add(currentPage-i);
+//			pageList.add(currentPage);
+//			//right side
+//			for(int i=1; i<=halfAllowedPage; ++i)
+//				pageList.add(currentPage+i);
+//			
+//		}
+		
+		Pagination pagination=new Pagination(noAllowedPage, noResultPerPage, totalResult, totalPage);
+		List<Integer> pageList=pagination.generatePageList(currentPage);
+		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("trangThaiDonHang",trangThaiDonHang);
 		model.addAttribute("startDate",startDate);
@@ -146,7 +151,7 @@ public class AdminController {
 		if(donHangID!=0)
 			searchDonHangCriteria.setId(donHangID);
 		
-		List<DonHang> donHangList=this.donHangService.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, 0, noResultPerPage);
+		List<DonHang> donHangList=this.donHangService.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, (currentPage-1)*noResultPerPage, noResultPerPage);
 		model.addAttribute("donHangList",donHangList);
 	
 		

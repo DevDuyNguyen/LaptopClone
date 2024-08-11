@@ -18,7 +18,7 @@
 			
 		</div>
 		
-		<a th:unless="${currentPage==totalPage}" th:href="@{${url}+${requestParameters}+'&'+currentPage='+${currentPage+1}}">Next</a>
+		<a th:unless="${currentPage==totalPage}" th:href="@{${url}+${requestParameters}+'&'+'currentPage='+${currentPage+1}}">Next</a>
 		
 		
 	</div>
