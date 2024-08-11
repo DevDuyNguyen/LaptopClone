@@ -12,8 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class DonHang {
@@ -31,6 +33,10 @@ public class DonHang {
 	private String trangThaiDonHang;
 	private String ghiChu;
 	private long tongGiaTri;
+	
+//	@OneToOne
+//	@JoinColumn(name="trangThaiDonHang")
+//	TrangThaiDonHang trangThaiDonHang;
 	
 	@ManyToOne
 	@JoinColumn(name ="ma_nguoi_dat")
@@ -89,14 +95,23 @@ public class DonHang {
 	public void setNgayNhanHang(Date ngayNhanHang) {
 		this.ngayNhanHang = ngayNhanHang;
 	}
+//	
+//	public TrangThaiDonHang getTrangThaiDonHang() {
+//		return trangThaiDonHang;
+//	}
+//	public void setTrangThaiDonHang(TrangThaiDonHang trangThaiDonHang) {
+//		this.trangThaiDonHang = trangThaiDonHang;
+//	}
+	
+	
+	public String getGhiChu() {
+		return ghiChu;
+	}
 	public String getTrangThaiDonHang() {
 		return trangThaiDonHang;
 	}
 	public void setTrangThaiDonHang(String trangThaiDonHang) {
 		this.trangThaiDonHang = trangThaiDonHang;
-	}
-	public String getGhiChu() {
-		return ghiChu;
 	}
 	public void setGhiChu(String ghiChu) {
 		this.ghiChu = ghiChu;

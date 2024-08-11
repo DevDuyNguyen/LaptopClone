@@ -19,5 +19,8 @@
   <mapping class="com.example.LaptopShopClone.Entity.GioHang"/>
   <mapping class="com.example.LaptopShopClone.Entity.HangSanXuat"/>
   <mapping class="com.example.LaptopShopClone.Entity.SanPham"/>
+<!--   <mapping class="com.example.LaptopShopClone.Entity.TrangThaiDonHang"/> -->
+  
+  
  </session-factory>
 </hibernate-configuration>
