@@ -18,10 +18,13 @@ function calculateOrderTotal(){
 	let sum=0;
 	for(let sanpham_total of sanpham_total_list){
 		sum+=parseInt(sanpham_total.innerText);
+		console.log(parseInt(sanpham_total.innerText));
 	}
 	
+	console.log(sum);
+	console.log("sdfadsf");
 	let ordertotal=document.getElementById("ordertotal");
-	ordertotal.innerHTML=sum;
+	ordertotal.innerHTML=sum; 
 }
 
 setTimeout(()=>{

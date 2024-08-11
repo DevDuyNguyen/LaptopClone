@@ -41,7 +41,7 @@ function changeQuanity(sanPham){
 			let sanphamTotal=document.getElementById("sanpham"+sp_id);
 			sanphamTotal.innerHTML=sp_donGia*sanPham.value;
 			sanphamTotal.setAttribute("data-total",sp_donGia*sanPham.value);
-			calculateOrderTotal();
+			calculateCartTotal();
 		}
 	}
 	
@@ -64,7 +64,7 @@ function deleteFromCart(sanPham){
 		else if(responseObject.status==="success"){
 			let sanPhamInfo=document.getElementById("sanpham_info"+sp_id);
 			sanPhamInfo.remove();
-			calculateOrderTotal();
+			calculateCartTotal();
 			
 		}
 	}
@@ -72,7 +72,7 @@ function deleteFromCart(sanPham){
 	xhr.send();
 }
 
-function calculateOrderTotal(){
+function calculateCartTotal(){
 	let ordertotal=document.getElementById("ordertotal");
 	if(ordertotal===null)
 		return;
@@ -88,5 +88,5 @@ function calculateOrderTotal(){
 }
 
 setTimeout(()=>{
-	calculateOrderTotal()
+	calculateCartTotal()
 },800);

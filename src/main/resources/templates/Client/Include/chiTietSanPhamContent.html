@@ -48,7 +48,7 @@
 							<h4 class="price" th:text="'Giá bán:'+${sp.donGia}"></h4>
 							<div class="action">
 								<!--not done: chua thuc hien thao tac chon vao gio hang -->
-								<button class="add-to-cart btn btn-warning" type="button">
+								<button class="add-to-cart btn btn-warning" type="button" th:onclick="'addToCart('+${sp.id}+')'">
 								<span class="glyphicon glyphicon-shopping-cart pull-center"></span> Giỏ hàng</button>
 							</div>
 						</div>
