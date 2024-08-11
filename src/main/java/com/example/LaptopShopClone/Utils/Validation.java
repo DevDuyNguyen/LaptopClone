@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
 import com.example.LaptopShopClone.ServiceImpl.NguoiDungServiceImpl;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Service
@@ -53,6 +57,12 @@ public class Validation {
 		
 		return "redirect:/home";
 		
+	}
+	
+	public Boolean isLoggin(HttpServletRequest httpServletRequest) {
+		HttpSession session=httpServletRequest.getSession();
+		NguoiDung nguoiDung=(NguoiDung)session.getAttribute("loggedUser");
+		return nguoiDung!=null;
 	}
 	
 }

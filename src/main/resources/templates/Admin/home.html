@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="Admin/Include/header :: head"></head>
+<body>
+
+	<div th:replace="Admin/Include/header :: header"></div>
+	
+	<div id="body">
+		<div class="col-md-9 animated bounce">
+			<h3 class="page-header">Danh sách công việc</h3>
+			<div th:if="${soLuongDonHangMoi>0}">
+		         <p>Bạn có: <a th:href="@{/admin/don-hang}"><span th:text="${soLuongDonHangMoi}"></span> đơn hàng mới</a><p>
+		    </div>
+		    
+		    <div th:if="${soLuongDonHangCanPheDuyet>0}">
+		         <p>Bạn có: <a th:href="@{admin/don-hang}"> <span th:text="${soLuongDonHangCanPheDuyet}"></span> đơn hàng chờ duyệt</a><p>
+		    </div>
+		
+		    
+		</div>		
+	</div>
+
+</body>
+</html>

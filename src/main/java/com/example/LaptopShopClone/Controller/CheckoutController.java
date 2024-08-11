@@ -137,7 +137,7 @@ public class CheckoutController {
 		donHang.setDiaChiNhan(diaChiNhan);
 		donHang.setNguoiDat(nguoiDung);
 		donHang.setNgayDatHang(new Date());
-		donHang.setTrangThaiDonHang("Đang chờ xử lý");
+		donHang.setTrangThaiDonHang("Đang chờ phê duyệt");
 		donHang=this.donHangService.SaveOrUpdate(donHang);
 		
 		List<ChiTietDonHang> chiTietDonHangList=new ArrayList<ChiTietDonHang>();

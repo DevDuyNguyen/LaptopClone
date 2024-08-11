@@ -46,10 +46,14 @@ public class AdminController {
 	}
 	
 	@GetMapping("")
-	public String getAdminPage(Model model, @ModelAttribute("role_list") List<VaiTro> role_list) {
-		//Đang chờ duyệt
+	public String getAdminPage(Model model, @ModelAttribute("role_list") List<VaiTro> role_list, HttpServletRequest httpServletRequest) {
+		//Đang chờ phê duyệt
 		//Đang chờ giao
 		//
+		
+		if(!validation.isLoggin(httpServletRequest)) {
+			return "redirect:/login";
+		}
 		
 		String memberAcess=this.validation.manageRoleAccess(role_list,vaiTroService.getVaiTroByName("ROLE_ADMIN"));
 		if(!memberAcess.equals("ok")) {
@@ -57,7 +61,7 @@ public class AdminController {
 		}
 		
 		int soLuongDonHangMoi=this.donHangService.soLuongDonHangByTrangThai("Đang chờ giao");
-		int soLuongDonHangCanPheDuyet=this.donHangService.soLuongDonHangByTrangThai("Đang chờ duyệt");;
+		int soLuongDonHangCanPheDuyet=this.donHangService.soLuongDonHangByTrangThai("Đang chờ phê duyệt");;
 		
 		model.addAttribute("soLuongDonHangMoi", soLuongDonHangMoi);
 		model.addAttribute("soLuongDonHangCanPheDuyet", soLuongDonHangCanPheDuyet);
