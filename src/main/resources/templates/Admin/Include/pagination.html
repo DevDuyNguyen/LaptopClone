@@ -7,16 +7,18 @@
 <body>
 	
 	<div th:fragment="pagination">
-		<a th:unless="${currentPage==1}" th:href="@{url+requestParameters+'&currentPage='+currentPage-1}">Back</a>
+		<a th:unless="${currentPage==1}" th:href="@{${url}+${requestParameters}+'&'+'currentPage='+${currentPage-1}}">Back</a>
 		
 		<div th:each="page:${pageList}">
 			
-			<a th:if="${currentPage==page}" th:href="@{url+requestParameters+'&currentPage='+page}" th:text="${page}" style="color:red"></a>
-			<a th:unless="${currentPage==page}" th:href="@{url+requestParameters+'&currentPage='+page}" th:text="${page}" style="color:red"></a>
+			<a th:if="${currentPage==page}" th:href="@{${url}+${requestParameters}+'&'+'currentPage='+${page}}" th:text="${page}" style="color:red"></a>
+			<a th:unless="${currentPage==page}" th:href="@{${url}+${requestParameters}+'&'+'currentPage='+${page}}" th:text="${page}"></a>
+			
+
 			
 		</div>
 		
-		<a th:unless="${currentPage==totalPage}" th:href="@{url+requestParameters+'&currentPage='+currentPage+1}">Next</a>
+		<a th:unless="${currentPage==totalPage}" th:href="@{${url}+${requestParameters}+'&'+currentPage='+${currentPage+1}}">Next</a>
 		
 		
 	</div>

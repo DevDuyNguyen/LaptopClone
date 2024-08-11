@@ -1,5 +1,6 @@
 package com.example.LaptopShopClone.Controller;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -98,6 +99,12 @@ public class AdminController {
 		int totalPage=(int)Math.ceil((double)totalResult/noResultPerPage);
 		int halfAllowedPage=(int)noAllowedPage/2;
 		
+		try {
+			trangThaiDonHang=java.net.URLDecoder.decode(trangThaiDonHang, StandardCharsets.UTF_8.name());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		List<Integer> pageList=new ArrayList<Integer>();
 		if(currentPage>=1 && currentPage<=5) {
 			for(int i=1; i<=noAllowedPage && i<=totalPage; ++i)
@@ -126,7 +133,7 @@ public class AdminController {
 		model.addAttribute("totalPage", totalPage);
 		String requestParameters="?trangThaiDonHang="+trangThaiDonHang+"&startDate="+startDate+"&endDate="+endDate+"&donHangID="+donHangID;
 		model.addAttribute("requestParameters",requestParameters);
-		model.addAttribute("url", "/don-hang");
+		model.addAttribute("url", "/admin/don-hang");
 		
 		
 		
