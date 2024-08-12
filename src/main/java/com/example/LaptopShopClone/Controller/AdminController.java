@@ -94,9 +94,24 @@ public class AdminController {
 			@RequestParam(name="donHangID", defaultValue = "0") long donHangID
 			) {
 		
+		
+		SearchDonHangCriteria searchDonHangCriteria=new SearchDonHangCriteria();
+		searchDonHangCriteria.setTrangThaiDonHang(trangThaiDonHang);
+		if(!startDate.equals(""))
+			searchDonHangCriteria.setStartDate(Date.valueOf(startDate));
+		if(!endDate.equals(""))
+			searchDonHangCriteria.setEndDate(Date.valueOf(endDate));
+		if(donHangID!=0)
+			searchDonHangCriteria.setId(donHangID);
+		
 		int noAllowedPage=5;//only allow odd number
 		int noResultPerPage=8;
-		int totalResult=this.donHangService.getTotalNumberDonHang();
+		
+		List<DonHang> donHangList=this.donHangService.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, (currentPage-1)*noResultPerPage, noResultPerPage);
+		model.addAttribute("donHangList",donHangList);
+		
+		
+		int totalResult=this.donHangService.getTotalNumberDonHangByCriteria(searchDonHangCriteria);
 		int totalPage=(int)Math.ceil((double)totalResult/noResultPerPage);
 		int halfAllowedPage=(int)noAllowedPage/2;
 		
@@ -142,17 +157,9 @@ public class AdminController {
 		
 		
 		
-		SearchDonHangCriteria searchDonHangCriteria=new SearchDonHangCriteria();
-		searchDonHangCriteria.setTrangThaiDonHang(trangThaiDonHang);
-		if(!startDate.equals(""))
-			searchDonHangCriteria.setStartDate(Date.valueOf(startDate));
-		if(!endDate.equals(""))
-			searchDonHangCriteria.setEndDate(Date.valueOf(endDate));
-		if(donHangID!=0)
-			searchDonHangCriteria.setId(donHangID);
 		
-		List<DonHang> donHangList=this.donHangService.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, (currentPage-1)*noResultPerPage, noResultPerPage);
-		model.addAttribute("donHangList",donHangList);
+		
+
 	
 		
 		

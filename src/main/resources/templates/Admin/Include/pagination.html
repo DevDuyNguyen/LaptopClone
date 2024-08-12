@@ -6,7 +6,7 @@
 </head>
 <body>
 	
-	<div th:fragment="pagination">
+	<div th:fragment="pagination" th:if="${#lists.size(pageList)>0}">
 		<a th:unless="${currentPage==1}" th:href="@{${url}+${requestParameters}+'&'+'currentPage='+${currentPage-1}}">Back</a>
 		
 		<div th:each="page:${pageList}">

@@ -8,7 +8,10 @@
 	
 
 <!-- </head> -->
-<head th:replace="Client/Include/header :: head"></head>
+<head>
+	
+	<th:block th:replace="Client/Include/header :: commonCSS"></th:block>
+</head>
 <body>
 	<div th:replace="Client/Include/header :: header"></div>
 	

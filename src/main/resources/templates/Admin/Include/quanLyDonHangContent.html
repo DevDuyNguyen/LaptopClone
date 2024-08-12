@@ -11,31 +11,35 @@
 		<div class="col-md-9 animated bounce">
 			<h3 class="page-header form-inline">Quản lý Đơn hàng</h3>
 	
-			<form class="form-inline" id="searchForm" name="searchObject">
+			<form class="form-inline" id="searchForm" name="searchObject" th:action="@{/admin/don-hang}">
 	
-				<select class="form-control" id="trangThai" th:value="${trangThaiDonHang}">
+				<select class="form-control" id="trangThaiDonHang" name="trangThaiDonHang" th:value="${trangThaiDonHang}">
+					<option value="Tất cả">Tất cả</option>
 					<option value="Đang chờ giao">Đang chờ giao</option>
 					<option value="Đang giao">Đang giao</option>
-					<option value="Chờ duyệt">Chờ duyệt</option>
+					<option value="Đang chờ phê duyệt">Đang chờ phê duyệt</option>
 					<option value="Hoàn thành">Hoàn thành</option>
 					<option value="Đã bị hủy">Đã bị hủy</option>
 					<!-- <option value="">Tất cả</option> -->
 				</select>
 	
 				<div class="form-group">
-					<input class="form-control" type="text" id="fromDate" placeholder="Từ ngày" th:value="${startDate}">
+					<input class="form-control" type="date" id="startDate" name="startDate" placeholder="Từ ngày" th:value="${startDate}">
 				</div>
 	
 				<div class="form-group">
-					<input class="form-control" type="text" id="toDate" placeholder="Đến ngày" th:value="${endDate}">
+					<input class="form-control" type="date" id="endDate" name="endDate" placeholder="Đến ngày" th:value="${endDate}">
 				</div>
 				&nbsp;&nbsp; &nbsp;&nbsp;
 				<button type="button" class="btn btn-primary" id="btnDuyetDonHang">Duyệt Đơn</button>
 				
 				<div class="form-group" style="float: right; margin-right: 20px">
-					<input class="form-control" type="number" id="searchById" placeholder="Nhập mã để tìm nhanh"> 
+					<input class="form-control" type="number" id="donHangID" name="donHangID" placeholder="Nhập mã để tìm nhanh"> 
 					<span class="glyphicon glyphicon-search" aria-hidden="true" style="left: -30px; top: 4px"></span>
 				</div>
+				
+				<input type="submit" name="loc" value="Lọc">
+				
 			</form>
 	
 			<hr />

@@ -60,4 +60,7 @@ public class DonHangServiceImpl implements DonHangService{
 		return this.donHangRepository.getDonhangByCriteriaPageConstraint(searchDonHangCriteria, offset, limit);
 	}
 	
+	public 	int getTotalNumberDonHangByCriteria(SearchDonHangCriteria searchDonHangCriteria) {
+		return this.donHangRepository.getTotalNumberDonHangByCriteria(searchDonHangCriteria);
+	}
 }

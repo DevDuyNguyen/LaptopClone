@@ -22,4 +22,8 @@ public interface DonHangService {
 	int getTotalNumberDonHang();
 	
 	List<DonHang> getDonhangByCriteriaPageConstraint(SearchDonHangCriteria searchDonHangCriteria, int offset, int limit);
+	
+	int getTotalNumberDonHangByCriteria(SearchDonHangCriteria searchDonHangCriteria);
+	
+	
 }

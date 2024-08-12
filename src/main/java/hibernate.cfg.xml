@@ -3,23 +3,26 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:4306/LaptopShopClone</property>
-  <property name="hibernate.connection.username">root</property>
-  <property name="hibernate.connection.password">111</property>
-  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-  <property name="show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
-  <!-- Mapping -->
-  <mapping class="com.example.LaptopShopClone.Entity.NguoiDung"/>
-  <mapping class="com.example.LaptopShopClone.Entity.VaiTro"/>
-  <mapping class="com.example.LaptopShopClone.Entity.ChiMucGioHang"/>
-  <mapping class="com.example.LaptopShopClone.Entity.ChiTietDonHang"/>
-  <mapping class="com.example.LaptopShopClone.Entity.DanhMuc"/>
-  <mapping class="com.example.LaptopShopClone.Entity.DonHang"/>
-  <mapping class="com.example.LaptopShopClone.Entity.GioHang"/>
-  <mapping class="com.example.LaptopShopClone.Entity.HangSanXuat"/>
-  <mapping class="com.example.LaptopShopClone.Entity.SanPham"/>
-<!--   <mapping class="com.example.LaptopShopClone.Entity.TrangThaiDonHang"/> -->
+	<property name="hibernate.connection.url">jdbc:mysql://localhost:4306/LaptopShopClone</property>
+	<property name="hibernate.connection.username">root</property>
+	<property name="hibernate.connection.password">111</property>
+	<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+	<property name="show_sql">true</property>
+	<property name="hibernate.hbm2ddl.auto">update</property>
+	<property name="format_sql">true</property>
+	<property name="use_sql_comments">true</property>
+  
+	<!-- Mapping -->
+	<mapping class="com.example.LaptopShopClone.Entity.NguoiDung"/>
+	<mapping class="com.example.LaptopShopClone.Entity.VaiTro"/>
+	<mapping class="com.example.LaptopShopClone.Entity.ChiMucGioHang"/>
+	<mapping class="com.example.LaptopShopClone.Entity.ChiTietDonHang"/>
+	<mapping class="com.example.LaptopShopClone.Entity.DanhMuc"/>
+	<mapping class="com.example.LaptopShopClone.Entity.DonHang"/>
+	<mapping class="com.example.LaptopShopClone.Entity.GioHang"/>
+	<mapping class="com.example.LaptopShopClone.Entity.HangSanXuat"/>
+	<mapping class="com.example.LaptopShopClone.Entity.SanPham"/>
+	<!--   <mapping class="com.example.LaptopShopClone.Entity.TrangThaiDonHang"/> -->
   
   
  </session-factory>

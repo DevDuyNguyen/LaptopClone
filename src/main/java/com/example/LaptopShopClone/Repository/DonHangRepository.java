@@ -92,14 +92,36 @@ public class DonHangRepository {
 		 String sql="select * from donhang where 1";
 		 
 		 if(searchDonHangCriteria.getTrangThaiDonHang()!=null && !searchDonHangCriteria.getTrangThaiDonHang().equals("") && !searchDonHangCriteria.getTrangThaiDonHang().equals("Tất cả")) {
-			 sql+=" AND donhang.trangThaiDonHang"+searchDonHangCriteria.getTrangThaiDonHang();
+			 sql+=" AND donhang.trangThaiDonHang='"+searchDonHangCriteria.getTrangThaiDonHang()+"'";
 		 }
 		 
 		 if(searchDonHangCriteria.getStartDate()!=null) {
-			 sql+=" AND donhang.ngayDatHang>="+searchDonHangCriteria.getStartDate();
+			 sql+=" AND donhang.ngayDatHang>='"+searchDonHangCriteria.getStartDate()+"'";
 		 }
 		 if(searchDonHangCriteria.getEndDate()!=null) {
-			 sql+=" AND donhang.ngayDatHang<="+searchDonHangCriteria.getEndDate();
+			 sql+=" AND donhang.ngayDatHang<='"+searchDonHangCriteria.getEndDate()+"'";
+		 }
+		 if(searchDonHangCriteria.getId()!=0) {
+			 sql+=" AND donhang.id="+searchDonHangCriteria.getId();
+		 }
+		
+		 sql+=" ORDER BY donhang.id DESC";
+		 
+		 return sql;
+	 }
+	
+	public String generateSQLCountDonHangFromCriteria(SearchDonHangCriteria searchDonHangCriteria) {
+		 String sql="select count(*) from donhang where 1";
+		 
+		 if(searchDonHangCriteria.getTrangThaiDonHang()!=null && !searchDonHangCriteria.getTrangThaiDonHang().equals("") && !searchDonHangCriteria.getTrangThaiDonHang().equals("Tất cả")) {
+			 sql+=" AND donhang.trangThaiDonHang='"+searchDonHangCriteria.getTrangThaiDonHang()+"'";
+		 }
+		 
+		 if(searchDonHangCriteria.getStartDate()!=null) {
+			 sql+=" AND donhang.ngayDatHang>='"+searchDonHangCriteria.getStartDate()+"'";
+		 }
+		 if(searchDonHangCriteria.getEndDate()!=null) {
+			 sql+=" AND donhang.ngayDatHang<='"+searchDonHangCriteria.getEndDate()+"'";
 		 }
 		 if(searchDonHangCriteria.getId()!=0) {
 			 sql+=" AND donhang.id="+searchDonHangCriteria.getId();
@@ -119,11 +141,19 @@ public class DonHangRepository {
 		sqlQuery.setParameter("limit", limit);
 		sqlQuery.setParameter("offset", offset);
 		
-		System.out.println("getDonhangByCriteriaPageConstraint:"+sql);
 		
 		return sqlQuery.getResultList();
 		
 		
+		
+	}
+	
+	public int getTotalNumberDonHangByCriteria(SearchDonHangCriteria searchDonHangCriteria) {
+		String sql=this.generateSQLCountDonHangFromCriteria(searchDonHangCriteria);
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Query sqlQuery=session.createNativeQuery(sql, Integer.class);
+		
+		return (Integer)sqlQuery.uniqueResult();
 		
 	}
 	
