@@ -67,113 +67,124 @@
 						<td th:text="${donHang.ngayGiaoHang}"></td>
 						<td th:text="${donHang.ngayNhanHang}"></td>
 						<td th:text="${donHang.shipper==null?'':donHang.shipper.id}"></td>
+						<td>
+							<button type="button" th:if="${donHang.trangThaiDonHang!='Hoàn thành'} and ${donHang.trangThaiDonHang!='Đã bị hủy'}">Hủy</button>
+							<button type="button" 
+							data-modal-target="modal-chitietdonhang" 
+							th:data-donhangID="${donHang.id}"
+							th:data-trangThaiDonHang="${donHang.trangThaiDonHang}"
+							onclick="showDonHangChitiet(this)">Chi tiết</button>
+							
+							<button type="button" th:if="${donHang.trangThaiDonHang!='Đang chờ giao'}">Phân công</button>
+							
+						</td>
 					</tr>
+					
+					
 					
 				</tbody>
 	
 			</table>
 	
 		</div>
-<!-- 		<div class="row col-md-6"> -->
-<!-- 			<form class="chiTietForm"> -->
-<!-- 				<div class="modal fade" id="chiTietModal" tabindex="-1" role="dialog" -->
-<!-- 					aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-<!-- 					<div class="modal-dialog" role="document" style="width: 700px;"> -->
-<!-- 						<div class="modal-content"> -->
-<!-- 							<div class="modal-header"> -->
-<!-- 								<p class="h4 modal-title" id="maDonHang"></p> -->
-<!-- 								<button type="button" class="close" data-dismiss="modal" -->
-<!-- 									aria-label="Close"> -->
-<!-- 									<span aria-hidden="true">&times;</span> -->
-<!-- 								</button> -->
-<!-- 							</div> -->
-<!-- 							<div class="modal-body"> -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col-12"> -->
-<!-- 										<div class="card" style="padding-left: 40px;padding-right: 40px"> -->
-	
-<!-- 											<div class="row pb-5 p-5"> -->
-<!-- 												<div class="col-md-6"> -->
-<!-- 													<h5 class="font-weight-bold mb-4"> -->
-<!-- 														<strong>Thông tin khách</strong> -->
-<!-- 													</h5> -->
-<!-- 													<p class="mb-1" id="hoTenNguoiNhan"></p> -->
-<!-- 													<p class="mb-1" id="diaChiNhan"></p> -->
-<!-- 													<p class="mb-1" id="sdtNhanHang"></p> -->
-<!-- 												</div> -->
-	
-<!-- 												<div class="col-md-6 text-right" -->
-<!-- 													style="text-align: left; padding-left: 100px"> -->
-<!-- 													<h5 class="font-weight-bold mb-4"> -->
-<!-- 														<strong>Thông tin đơn hàng</strong> -->
-<!-- 													</h5> -->
-<!-- 													<p class="mb-1" id="trangThaiDonHang"></p> -->
-<!-- 													<p class="mb-1" id="ngayDatHang"></p> -->
-<!-- 													<p class="mb-1" id="ngayShipHang"></p> -->
-<!-- 													<p class="mb-1" id="ngayNhanHang"></p> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 											<hr /> -->
-<!-- 											<div class="row p-5"> -->
-<!-- 												<div class="col-md-12"> -->
-<!-- 													<table class="table chiTietTable" -->
-<!-- 														style="text-align: center;"> -->
-<!-- 														<thead> -->
-<!-- 															<tr> -->
-<!-- 																<th -->
-<!-- 																	class="border-0 text-uppercase small font-weight-bold">STT</th> -->
-<!-- 																<th -->
-<!-- 																	class="border-0 text-uppercase small font-weight-bold">Tên -->
-<!-- 																	sản phẩm</th> -->
-	
-<!-- 																<th -->
-<!-- 																	class="border-0 text-uppercase small font-weight-bold">Đơn -->
-<!-- 																	giá</th> -->
-<!-- 																<th -->
-<!-- 																	class="border-0 text-uppercase small font-weight-bold">Số -->
-<!-- 																	lượng đặt</th> -->
-	
-<!-- 															</tr> -->
-<!-- 														</thead> -->
-<!-- 														<tbody> -->
-<!-- 														</tbody> -->
-<!-- 													</table> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-	
-<!-- 											<div class="d-flex flex-row-reverse bg-dark text-white p-4"> -->
-<!-- 												<div class="py-3 px-5 text-right"> -->
-<!-- 													<div class="mb-2"> -->
-<!-- 														<p id="tongTien"></p> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 											<hr /> -->
-	
-<!-- 											<div class="col-md-6"> -->
-<!-- 												<h5 class="font-weight-bold mb-4"> -->
-<!-- 													<strong>Thông tin khác</strong> -->
-<!-- 												</h5> -->
-<!-- 												<p class="mb-1" id="shipper"></p> -->
-<!-- 												<p class="mb-1" id="nguoiDat"></p> -->
-<!-- 												<p id="ghiChu"></p> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="modal-footer"> -->
-<!-- 								<button type="button" class="btn btn-secondary" -->
-<!-- 									data-dismiss="modal">Đóng</button> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</form> -->
-<!-- 		</div> -->
+		
+		
+		<div class="modal" id="modal-chitietdonhang">
+			<div class="modal-content">
+				<div class="modal-header">
+					<p id="maDonHang" th:text></p>
+					<button type="button" class="modal-close-button">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12">
+							<div class="card" style="padding-left: 40px;padding-right: 40px">
+
+								<div class="row pb-5 p-5">
+									<div class="col-md-6">
+										<h5 class="font-weight-bold mb-4">
+											<strong>Thông tin khách</strong>
+										</h5>
+										<p class="mb-1" id="hoTenNguoiNhan"></p>
+										<p class="mb-1" id="diaChiNhan"></p>
+										<p class="mb-1" id="sdtNhanHang"></p>
+									</div>
+
+									<div class="col-md-6 text-right"
+										style="text-align: left; padding-left: 100px">
+										<h5 class="font-weight-bold mb-4">
+											<strong>Thông tin đơn hàng</strong>
+										</h5>
+										<p class="mb-1" id="trangThaiDonHang"></p>
+										<p class="mb-1" id="ngayDatHang"></p>
+										<p class="mb-1" id="ngayShipHang"></p>
+										<p class="mb-1" id="ngayNhanHang"></p>
+										
+									</div>
+									
+								</div>
+								<hr />
+								<div class="row p-5">
+									<div class="col-md-12">
+										<table class="chiTietDonHang"
+											style="text-align: center;">
+											<thead>
+												<tr>
+													<th
+														class="border-0 text-uppercase small font-weight-bold">STT</th>
+													<th
+														class="border-0 text-uppercase small font-weight-bold">Tên
+														sản phẩm</th>
+
+													<th
+														class="border-0 text-uppercase small font-weight-bold">Đơn
+														giá</th>
+													<th
+														class="border-0 text-uppercase small font-weight-bold">Số
+														lượng đặt</th>
+
+												</tr>
+											</thead>
+											
+											<tbody>
+											</tbody>
+											
+										</table>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row-reverse bg-dark text-white p-4">
+									<div class="py-3 px-5 text-right">
+										<div class="mb-2">
+											<p id="orderTotal"></p>
+										</div>
+									</div>
+								</div>
+								<hr />
+
+								<div class="col-md-6">
+									<h5 class="font-weight-bold mb-4">
+										<strong>Thông tin khác</strong>
+									</h5>
+									<p class="mb-1" id="shipper"></p>
+									<p class="mb-1" id="nguoiDat"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="overlay"></div>
 		
 		
 		<div th:replace="Admin/Include/pagination :: pagination"></div>
+		
+		<script th:src="@{/js/quanLyDonHang.js}"></script>
 		
 	</div>
 
