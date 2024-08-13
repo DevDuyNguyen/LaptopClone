@@ -89,10 +89,10 @@
 		</div>
 		
 		
-		<div class="modal" id="modal-chitietdonhang">
+		<div class="my-modal" id="modal-chitietdonhang">
 			<div class="modal-content">
 				<div class="modal-header">
-					<p id="maDonHang" th:text></p>
+					<p>Mã đơn hàng:<span id="maDonHang"></span></p>
 					<button type="button" class="modal-close-button">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -108,9 +108,9 @@
 										<h5 class="font-weight-bold mb-4">
 											<strong>Thông tin khách</strong>
 										</h5>
-										<p class="mb-1" id="hoTenNguoiNhan"></p>
-										<p class="mb-1" id="diaChiNhan"></p>
-										<p class="mb-1" id="sdtNhanHang"></p>
+										<p class="mb-1">Người nhận:<span id="hoTenNguoiNhan"></span></p>
+										<p class="mb-1">Địa chỉ:<span id="diaChiNhan"></span></p>
+										<p class="mb-1">SĐT:<span id="sdtNhanHang"></span></p>
 									</div>
 
 									<div class="col-md-6 text-right"
@@ -118,10 +118,10 @@
 										<h5 class="font-weight-bold mb-4">
 											<strong>Thông tin đơn hàng</strong>
 										</h5>
-										<p class="mb-1" id="trangThaiDonHang"></p>
-										<p class="mb-1" id="ngayDatHang"></p>
-										<p class="mb-1" id="ngayShipHang"></p>
-										<p class="mb-1" id="ngayNhanHang"></p>
+										<p class="mb-1">Trạng thái đơn:<span id="trangThaiDonHang"></span></p>
+										<p class="mb-1">Ngày đặt hàng:<span id="ngayDatHang"></span></p>
+										<p class="mb-1">Ngày giao hàng:<span id="ngayShipHang"></span></p>
+										<p class="mb-1">Ngày nhận hàng:<span id="ngayNhanHang"></span></p>
 										
 									</div>
 									
@@ -156,10 +156,10 @@
 									</div>
 								</div>
 
-								<div class="d-flex flex-row-reverse bg-dark text-white p-4">
+								<div>
 									<div class="py-3 px-5 text-right">
 										<div class="mb-2">
-											<p id="orderTotal"></p>
+											<p >Tổng đơn hàng:<span id="orderTotal"></span></p>
 										</div>
 									</div>
 								</div>
@@ -169,8 +169,8 @@
 									<h5 class="font-weight-bold mb-4">
 										<strong>Thông tin khác</strong>
 									</h5>
-									<p class="mb-1" id="shipper"></p>
-									<p class="mb-1" id="nguoiDat"></p>
+									<p class="mb-1" >Người đặt:<span id="nguoiDat"></span></p>
+									<p class="mb-1" >Shipper:<span id="shipper"></span></p>
 								</div>
 							</div>
 						</div>

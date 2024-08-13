@@ -57,7 +57,7 @@ public class donHangAPI {
 		return getLoggedUser(httpServletRequest).getVaiTro();
 	}
 	
-	@GetMapping("/chiTietDonHang")
+	@GetMapping("/thongTinChiTietDonHang")
 	public ResponseEntity<ResponseObject> getChiTietDonHang(@RequestParam("id") long id, HttpServletRequest httpServletRequest,
 			@ModelAttribute("role_list") List<VaiTro> role_list){
 		ResponseObject ro=new ResponseObject();
@@ -73,6 +73,8 @@ public class donHangAPI {
 		ThongTinChiTietDonHang thongTinChiTietDonHang=new ThongTinChiTietDonHang();
 		
 		DonHang donHang=this.donHangService.getDonHangById(id);
+		
+		thongTinChiTietDonHang.setId(donHang.getId());
 		
 		thongTinChiTietDonHang.setTenNguoiNhan(donHang.getHoTenNguoiNhan());
 		thongTinChiTietDonHang.setDiaChiNhan(donHang.getDiaChiNhan());

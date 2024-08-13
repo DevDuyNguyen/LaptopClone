@@ -1,16 +1,16 @@
-.modal{
-    position:fixed;
-    top:30%;
-    bottom:30%;
+.my-modal{
+	position:fixed;
+    top:0%;
+    bottom:0%;
     left:20%;
     right:20%;
     visibility:hidden;
     background-color:white;
-    z-index:10;
+    z-index:100;
     
     
-  }
-  .modal.active{
+ }
+  .my-modal.active{
      visibility:visible;
   }
 

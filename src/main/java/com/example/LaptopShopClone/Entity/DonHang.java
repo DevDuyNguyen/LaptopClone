@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +19,25 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+
+//class ChiTietDonHangListSerializer extends JsonSerializer<List<ChiTietDonHang>>{
+//	
+//	@Override
+//	public void serialize(List<ChiTietDonHang> value, JsonGenerator jgen, SerializerProvider serializerProvider) {
+//		try {
+//			jgen.writeStartObject();
+//			jgen.writeArrayFieldStart("ChiTietDonHangList");
+//			for(ChiTietDonHang ctdh: value) {
+//				jgen.writeObject(ctdh.getId());
+//			}
+//			jgen.writeEndObject();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
+//	
+//}
 
 @Entity
 public class DonHang {

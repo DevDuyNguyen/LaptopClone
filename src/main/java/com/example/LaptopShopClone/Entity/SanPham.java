@@ -1,12 +1,48 @@
 package com.example.LaptopShopClone.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
+class SanPhamDanhMucSerialzer extends JsonSerializer<DanhMuc>{
+	@Override
+	public void serialize(DanhMuc value, JsonGenerator jgen, SerializerProvider serializerProvider) {
+		try {
+			jgen.writeStartObject();
+			jgen.writeStringField("danhmuc", value.getTenDanhMuc());
+			jgen.writeEndObject();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+class SanPhamHangSanXuatSerialzer extends JsonSerializer<HangSanXuat>{
+	@Override
+	public void serialize(HangSanXuat value, JsonGenerator jgen, SerializerProvider serializerProvider) {
+		try {
+			jgen.writeStartObject();
+			jgen.writeStringField("danhmuc", value.getTenHangSanXuat());
+			jgen.writeEndObject();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
 
 @Entity
 public class SanPham {
@@ -32,10 +68,12 @@ public class SanPham {
 
 	@ManyToOne
 	@JoinColumn(name = "ma_danh_muc")
+	@JsonSerialize(using=SanPhamDanhMucSerialzer.class)
 	private DanhMuc danhMuc;
 
 	@ManyToOne
 	@JoinColumn(name = "ma_hang_sx")
+	@JsonSerialize(using=SanPhamHangSanXuatSerialzer.class)
 	private HangSanXuat hangSanXuat;
 	
 	

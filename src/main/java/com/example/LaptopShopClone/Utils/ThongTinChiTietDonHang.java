@@ -7,6 +7,8 @@ import com.example.LaptopShopClone.Entity.ChiTietDonHang;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 
 public class ThongTinChiTietDonHang {
+	private long id;
+	
 	private String sdtNguoiNhan;
 	private String diaChiNhan;
 	private String tenNguoiNhan;
@@ -103,6 +105,13 @@ public class ThongTinChiTietDonHang {
 	public void setIdShipper(long idShipper) {
 		this.idShipper = idShipper;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	
 
 	
