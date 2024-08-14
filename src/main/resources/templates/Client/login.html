@@ -49,8 +49,29 @@
 			</form>
 			
 			<form class="login-form" method="POST" th:action="@{/login}">
-				<input id="submit" type="submit" value="For test only">
+				<input type="text" placeholder="Email" name="email" required="required" style="padding:  10px;" 
+				value="d1@gmail.com" hidden> 
+				<input type="password" placeholder="Mật khẩu" name="password" required="required" style="padding:  10px;" 
+				value="1234567890" hidden> 
+				<input id="submit" type="submit" value="For test admin">
+				
 			</form>
+			<form class="login-form" method="POST" th:action="@{/login}">
+				<input type="text" placeholder="Email" name="email" required="required" style="padding:  10px;" 
+				value="d2@gmail.com" hidden> 
+				<input type="password" placeholder="Mật khẩu" name="password" required="required" style="padding:  10px;" 
+				value="1234567890" hidden> 
+				<input id="submit" type="submit" value="For test user">
+				
+			</form>
+			<form class="login-form" method="POST" th:action="@{/login}">
+				<input type="text" placeholder="Email" name="email" required="required" style="padding:  10px;" 
+				value="d3@gmail.com" hidden> 
+				<input type="password" placeholder="Mật khẩu" name="password" required="required" style="padding:  10px;" 
+				value="1234567890" hidden> 
+				<input id="submit" type="submit" value="For test shipper">
+			</form>
+			
 		</div>
 	</div>
 	

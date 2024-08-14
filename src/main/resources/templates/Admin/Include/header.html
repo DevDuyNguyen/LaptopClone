@@ -27,7 +27,7 @@
 		      <div th:if="${loggedUser}">
 		        <ul>
 		          <li>
-		            <a href="@{/admin/profile}">
+		            <a th:href="@{/admin/profile}">
 		              <span class="glyphicon glyphicon-user">&nbsp;</span>Xin chào:<span th:text="${loggedUser.hoTen}"></span></a>
 		          </li>
 		          <li>

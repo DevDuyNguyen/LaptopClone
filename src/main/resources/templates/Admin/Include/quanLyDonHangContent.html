@@ -15,11 +15,17 @@
 	
 				<select class="form-control" id="trangThaiDonHang" name="trangThaiDonHang" th:value="${trangThaiDonHang}">
 					<option value="Tất cả">Tất cả</option>
+					<option value="Tất cả" th:if="${trangThaiDonHang=='Tất cả'}" selected>Tất cả</option>
 					<option value="Đang chờ giao">Đang chờ giao</option>
+					<option value="Đang chờ giao" th:if="${trangThaiDonHang=='Đang chờ giao'}" selected>Đang chờ giao</option>
 					<option value="Đang giao">Đang giao</option>
+					<option value="Đang giao" th:if="${trangThaiDonHang=='Đang giao'}" selected>Đang giao</option>
 					<option value="Đang chờ phê duyệt">Đang chờ phê duyệt</option>
+					<option value="Đang chờ phê duyệt" th:if="${trangThaiDonHang=='Đang chờ phê duyệt'}" selected>Đang chờ phê duyệt</option>
 					<option value="Hoàn thành">Hoàn thành</option>
+					<option value="Hoàn thành" th:if="${trangThaiDonHang=='Hoàn thành'}" selected>Hoàn thành</option>
 					<option value="Đã bị hủy">Đã bị hủy</option>
+					<option value="Đã bị hủy" th:if="${trangThaiDonHang=='Đã bị hủy'}" selected>Đã bị hủy</option>
 					<!-- <option value="">Tất cả</option> -->
 				</select>
 	
@@ -68,7 +74,11 @@
 						<td th:text="${donHang.ngayNhanHang}"></td>
 						<td th:text="${donHang.shipper==null?'':donHang.shipper.id}"></td>
 						<td>
-							<button type="button" th:if="${donHang.trangThaiDonHang!='Hoàn thành'} and ${donHang.trangThaiDonHang!='Đã bị hủy'}">Hủy</button>
+							<button type="button" 
+							th:if="${donHang.trangThaiDonHang!='Hoàn thành'} and ${donHang.trangThaiDonHang!='Đã bị hủy'}"
+							th:data-donHangID="${donHang.id}"
+							class="huyDonHangButton">Hủy</button>
+							
 							<button type="button" 
 							data-modal-target="modal-chitietdonhang" 
 							th:data-donhangID="${donHang.id}"

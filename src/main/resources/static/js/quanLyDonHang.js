@@ -64,17 +64,6 @@ function showDonHangChitiet(donHang){
 	
 }
 
-function openModal(modal, overlay){
-	modal.classList.add("active");
-	overlay.classList.add("active");
-	
-}
-function closeModal(modal, overlay){
-	modal.classList.remove("active");
-	overlay.classList.remove("active");
-	
-}
-
 
 
 let closeButtonList=document.querySelectorAll(".modal-close-button");
@@ -97,3 +86,48 @@ overlay.addEventListener("click",()=>{
 	});
 	
 });
+
+let huyDonHangButtonList=document.querySelectorAll(".huyDonHangButton");
+if(huyDonHangButtonList!==null){
+	huyDonHangButtonList.forEach(button=>{
+		let donHangRow=button.closest("tr");
+		let donHangID=button.getAttribute("data-donHangID");
+		button.addEventListener("click", ()=>{
+			huyDonHang(donHangRow, donHangID);
+		})
+	})
+}
+
+
+
+
+function openModal(modal, overlay){
+	modal.classsList.add("active");
+	overlay.classList.add("active");
+	
+}
+function closeModal(modal, overlay){
+	modal.classList.remove("active");
+	overlay.classList.remove("active");
+	
+}
+function huyDonHang(donHangRow, donHangID){
+	alert("Bạn có chắc muốn hủy đơn hàng "+donHangID+"?");
+	let xhr=new XMLHttpRequest();
+	
+	xhr.open("GET","/api/donhang/huyDonHang?donHangId="+donHangID, true);
+	xhr.onload=function(){
+		if(this.status==202){
+			let ro=JSON.parse(this.responseText);
+			if(ro.status=="fail"){
+				alert("Hủy đơn hàng "+donHangID+" thất bại.");
+			}
+			else if(ro.status==="success"){
+				alert("Hủy đơn hàng "+donHangID+" thành công.");
+				donHangRow.remove();
+			}
+		}
+	}
+	
+	xhr.send();
+}

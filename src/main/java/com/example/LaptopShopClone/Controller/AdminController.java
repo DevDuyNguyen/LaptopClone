@@ -67,7 +67,7 @@ public class AdminController {
 		
 		String memberAcess=this.validation.manageRoleAccess(role_list,vaiTroService.getVaiTroByName("ROLE_ADMIN"));
 		if(!memberAcess.equals("ok")) {
-			return memberAcess;
+			return "redirect:"+memberAcess;
 		}
 		
 		int soLuongDonHangMoi=this.donHangService.soLuongDonHangByTrangThai("Đang chờ giao");

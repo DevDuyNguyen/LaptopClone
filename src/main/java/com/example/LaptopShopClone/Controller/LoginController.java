@@ -58,7 +58,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestParam(name = "email", defaultValue = "d1@gmail.com") String email, @RequestParam(name = "password", defaultValue = "1234567890") String password, Model model, HttpServletRequest httpServletRequest) {
+	public String login(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password, Model model, HttpServletRequest httpServletRequest) {
 		String emailError=null;
 		String passwordError=null;
 		ArrayList<String> loginErrors=new ArrayList<String>();

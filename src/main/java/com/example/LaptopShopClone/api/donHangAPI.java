@@ -106,4 +106,31 @@ public class donHangAPI {
 		
 	}
 	
+	@GetMapping("/huyDonHang")
+	public ResponseEntity<ResponseObject> huyDonHang(@RequestParam("donHangId") long donHangId,
+			HttpServletRequest httpServletRequest,
+			@ModelAttribute("role_list") List<VaiTro> role_list){
+		if(!this.validation.isLoggin(httpServletRequest)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		String memberAccess=this.validation.manageRoleAccess(role_list, this.vaiTroService.getVaiTroByName("ROLE_ADMIN"));
+		if(!memberAccess.equals("ok")) {
+			return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header("Location", memberAccess).body(null);
+		}
+		
+		DonHang donHang=this.donHangService.getDonHangById(donHangId);
+		
+		if(donHang.getTrangThaiDonHang().equals("Hoàn thành") || donHang.getTrangThaiDonHang().equals("Đã bị hủy")) {
+			ResponseObject ro=new ResponseObject();
+			ro.setStatus("fail");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+		}
+		
+		donHang.setTrangThaiDonHang("Đã bị hủy");
+		this.donHangService.SaveOrUpdate(donHang);
+		ResponseObject ro=new ResponseObject();
+		ro.setStatus("success");
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ro);
+	}
+	
 }
