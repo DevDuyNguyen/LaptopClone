@@ -29,7 +29,7 @@ public class SanPhamRepository {
 		int minValue=searchSanPhamCriteria.getMinValue();
 		long maxValue=searchSanPhamCriteria.getMaxValue();
 		long danhMuc=searchSanPhamCriteria.getDanhMuc();
-		String hsx=searchSanPhamCriteria.getHsx();
+		long hsx=searchSanPhamCriteria.getHsx();
 		String sort=searchSanPhamCriteria.getSort();
 		
 		
@@ -53,12 +53,12 @@ public class SanPhamRepository {
 			sql+=" AND sp.donGia<="+maxValue;
 		}
 		
-		if(danhMuc!=-1) {
+		if(danhMuc>0) {
 			sql+=" AND danhmuc.id='"+danhMuc+"'";
 		}
 		
-		if(!hsx.equals("")) {
-			sql+=" AND tenHangSanXuat='"+hsx+"'";
+		if(hsx>0) {
+			sql+=" AND sp.ma_hang_sx='"+hsx+"'";
 		}
 		
 		if(!sort.equals("")) {
@@ -66,12 +66,19 @@ public class SanPhamRepository {
 			if(sort.equals("newest")) {
 				sql+=" ORDER BY sp.id DESC";
 			}
+			else if(sort.equals("oldest")) {
+				sql+=" ORDER BY sp.id ASC";
+			}
 			else if(sort.equals("priceAsc")) {
 				sql+=" ORDER BY sp.donGia ASC";
 			}
 			else if(sort.equals("priceDes")) {
 				sql+=" ORDER BY sp.donGia DESC";
 			}
+
+		}
+		else {
+			sql+=" ORDER BY sp.id ASC";
 		}
 		
 		return sql;
@@ -107,9 +114,7 @@ public class SanPhamRepository {
 		SessionFactory sessionFactory=sessionFactoryUtil.getSessionFactory();
 		Session session=sessionFactory.openSession();
 		Query query=session.createNativeQuery(sql, SanPham.class);
-		
-		System.out.println("sql:"+ sql);
-		
+				
 		resuList=query.getResultList();
 		
 		

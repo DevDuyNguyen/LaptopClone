@@ -55,7 +55,7 @@ public class Validation {
 			}
 		}
 		
-		return "http://localhost:8081/home";
+		return "/home";
 		
 	}
 	

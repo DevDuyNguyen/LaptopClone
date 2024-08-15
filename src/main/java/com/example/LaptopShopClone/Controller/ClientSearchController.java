@@ -2,6 +2,7 @@ package com.example.LaptopShopClone.Controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class ClientSearchController {
 			@RequestParam(name = "minValue", defaultValue = "0") int minValue,
 			@RequestParam(name = "maxValue", defaultValue = "-1") long maxValue,
 			@RequestParam(name = "danhMuc", defaultValue = "-1") long danhMuc,
-			@RequestParam(name="hsx", defaultValue = "") String hsx,
+			@RequestParam(name="hsx", defaultValue = "0") long hsx,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			Model model
 			) {

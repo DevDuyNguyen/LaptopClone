@@ -11,12 +11,12 @@
 	<div id="body">
 		<div class="col-md-9 animated bounce">
 			<h3 class="page-header">Danh sách công việc</h3>
-			<div th:if="${soLuongDonHangMoi>0}">
-		         <p>Bạn có: <a th:href="@{/admin/don-hang}"><span th:text="${soLuongDonHangMoi}"></span> đơn hàng đang chờ giao</a><p>
+			<div th:if="${soLuongDonHangDangChoDao>0}">
+		         <p>Bạn có: <a th:href="@{/admin/don-hang?trangThaiDonHang=Đang chờ giao)}"><span th:text="${soLuongDonHangDangChoDao}"></span> đơn hàng đang chờ giao</a><p>
 		    </div>
 		    
 		    <div th:if="${soLuongDonHangCanPheDuyet>0}">
-		         <p>Bạn có: <a th:href="@{admin/don-hang}"> <span th:text="${soLuongDonHangCanPheDuyet}"></span> đơn hàng chờ duyệt</a><p>
+		         <p>Bạn có: <a th:href="@{admin/don-hang?trangThaiDonHang=Đang chờ phê duyệt}"> <span th:text="${soLuongDonHangCanPheDuyet}"></span> đơn hàng chờ duyệt</a><p>
 		    </div>
 		
 		    

@@ -8,8 +8,9 @@ public class SearchSanPhamCriteria {
 	private int minValue;
 	private long maxValue;
 	private long danhMuc;
-	private String hsx;
-	
+	private long hsx;
+	private String trangThai;
+	private String name;
 	
 	
 	public String[] getKeyWord() {
@@ -42,11 +43,33 @@ public class SearchSanPhamCriteria {
 	public void setDanhMuc(Long danhMuc) {
 		this.danhMuc = danhMuc;
 	}
-	public String getHsx() {
+//	public String getHsx() {
+//		return hsx;
+//	}
+//	public void setHsx(String hsx) {
+//		this.hsx = hsx;
+//	}
+	
+	public String getTrangThai() {
+		return trangThai;
+	}
+	public long getHsx() {
 		return hsx;
 	}
-	public void setHsx(String hsx) {
+	public void setHsx(long hsx) {
 		this.hsx = hsx;
+	}
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
+	}
+	public void setDanhMuc(long danhMuc) {
+		this.danhMuc = danhMuc;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="quanLySanPhamContent">
+		
+		<div class="col-md-9 animated bounce">
+			<h3 class="page-header">Quản lý Sản Phẩm</h3>
+	
+			<div class="form-group form-inline">
+				<label for="sel1">THÊM MỚI SẢN PHẨM (THEO DANH MỤC): </label> 
+				<select id="danhMucDropdown" class="form-control">
+					<th:block th:each="danhmuc:${danhMucs}">
+						<option th:value="${danhmuc.tenDanhMuc}" th:text="${danhmuc.tenDanhMuc}"></option>
+					</th:block>
+				</select>
+			</div>
+			<hr>
+	
+			<form class="form-inline" id="searchForm">
+				<div class="form-group">
+					<select class="form-control" name="danhMucId" id="danhMuc">
+						<option value="">Tất cả danh mục</option>
+						<th:block th:each="danhmuc:${danhMucs}">
+							<option th:value="${danhmuc.id}" th:text="${danhmuc.tenDanhMuc}"></option>
+						</th:block>
+					</select>
+				</div>
+	
+				<div class="form-group">
+					<select class="form-control" name="hangSXId" id="hangSanXuat">
+						<option value="">Tất cả hãng sản xuất</option>
+						<th:block th:each="hsx:${hangSanXuats}">
+							<option th:value="${hsx.id}" th:text="${hsx.tenHangSanXuat}"></option>
+						</th:block>
+					</select>
+				</div>
+	
+				<div class="form-group">
+					<input placeholder="Giá trị nhỏ nhất" name="minValue" id="minValue" type="number">
+					<input placeholder="Giá trị lớn nhất" name="maxValue" id="maxValue" type="number">
+				</div>
+	
+				<div class="form-group">
+					<select class="form-control" name="sapXepTheo" id="sapXepTheo">
+						<option value=""></option>
+						<option value="priceAsc">Sắp xếp theo giá tăng dần</option>
+						<option value="priceDes">Sắp xếp theo giá giảm dần</option>
+						<option value="newest">Sắp xêp theo sản phẩm mới nhất</option>
+						<option value="oldest">Sắp xêp theo sản phẩm cũ nhất</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<input class="form-control" type="text" id="searchByName" name="searchByName" placeholder="Tên sản phẩm"> 
+				</div>
+				
+				
+				
+				&nbsp;&nbsp;
+				<button type="button" id="btnTimSanPham">Tìm sản phẩm</button>
+			</form>
+	
+			<form id="quickIdSearchForm">
+				<div class="form-group form-inline">
+					<input class="form-control" type="text" id="searchById" name="searchById" placeholder="Nhập mã để tìm nhanh"> 
+					<input type="submit" name="submit" hidden>
+				</div>
+			</form>
+	
+			<hr />
+			<table class="table table-hover sanPhamTable "
+				style="text-align: center;">
+				<thead>
+					<tr>
+						<th>Mã sản phẩm</th>
+						<th>Hình ảnh</th>
+						<th>Tên SP</th>
+						<th>Danh Mục</th>
+						<th>Hãng sản xuất</th>
+						<th>Đơn giá</th>
+						<th>Số lượng</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+	
+			</table>
+	
+			<div id="pagination"></div>
+		</div>
+		
+		
+		
+		
+		
+		<script src="/js/quanLySanPham.js"></script>
+	</div>
+	
+	
+	
+	
+	
+	
+</body>
+</html>

@@ -18,10 +18,10 @@ class SanPhamDanhMucSerialzer extends JsonSerializer<DanhMuc>{
 	@Override
 	public void serialize(DanhMuc value, JsonGenerator jgen, SerializerProvider serializerProvider) {
 		try {
-			jgen.writeStartObject();
-			jgen.writeStringField("danhmuc", value.getTenDanhMuc());
-			jgen.writeEndObject();
-			
+//			jgen.writeStartObject();
+//			jgen.writeStringField("danhmuc", value.getTenDanhMuc());
+//			jgen.writeEndObject();
+			jgen.writeObject(value.getTenDanhMuc());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,10 +33,11 @@ class SanPhamHangSanXuatSerialzer extends JsonSerializer<HangSanXuat>{
 	@Override
 	public void serialize(HangSanXuat value, JsonGenerator jgen, SerializerProvider serializerProvider) {
 		try {
-			jgen.writeStartObject();
-			jgen.writeStringField("danhmuc", value.getTenHangSanXuat());
-			jgen.writeEndObject();
+//			jgen.writeStartObject();
+//			jgen.writeStringField("danhmuc", value.getTenHangSanXuat());
+//			jgen.writeEndObject();
 			
+			jgen.writeObject(value.getTenHangSanXuat());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Entity.DonHang;
+import com.example.LaptopShopClone.Entity.HangSanXuat;
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
+import com.example.LaptopShopClone.ServiceImpl.DanhMucService;
 import com.example.LaptopShopClone.ServiceInterface.DonHangService;
+import com.example.LaptopShopClone.ServiceInterface.HangSanXuatService;
 import com.example.LaptopShopClone.ServiceInterface.VaiTroService;
 import com.example.LaptopShopClone.Utils.Pagination;
 import com.example.LaptopShopClone.Utils.SearchDonHangCriteria;
@@ -37,6 +41,11 @@ public class AdminController {
 	Validation validation;
 	@Autowired
 	VaiTroService vaiTroService;
+	@Autowired
+	DanhMucService danhMucService;
+	@Autowired
+	HangSanXuatService hangSanXuatService;
+	
 	
 	@ModelAttribute("loggedUser")
 	public NguoiDung getLoggedUser(HttpServletRequest httpServletRequest) {
@@ -70,10 +79,10 @@ public class AdminController {
 			return "redirect:"+memberAcess;
 		}
 		
-		int soLuongDonHangMoi=this.donHangService.soLuongDonHangByTrangThai("Đang chờ giao");
+		int soLuongDonHangDangChoDao=this.donHangService.soLuongDonHangByTrangThai("Đang chờ giao");
 		int soLuongDonHangCanPheDuyet=this.donHangService.soLuongDonHangByTrangThai("Đang chờ phê duyệt");;
 		
-		model.addAttribute("soLuongDonHangMoi", soLuongDonHangMoi);
+		model.addAttribute("soLuongDonHangDangChoDao", soLuongDonHangDangChoDao);
 		model.addAttribute("soLuongDonHangCanPheDuyet", soLuongDonHangCanPheDuyet);
 		
 		return "Admin/home";
@@ -155,18 +164,30 @@ public class AdminController {
 		model.addAttribute("requestParameters",requestParameters);
 		model.addAttribute("url", "/admin/don-hang");
 		
-		
-		
-		
-		
-
-	
-		
-		
-		
-		
-		
 		return "Admin/quanLyDonHang";
+	}
+	
+	@GetMapping("/quanLySanPham")
+	public String quanLySanPham(Model model,
+			HttpServletRequest httpServletRequest,
+			@ModelAttribute("role_list") List<VaiTro> role_list
+			) {
+		
+		if(!this.validation.isLoggin(httpServletRequest)) {
+			return "redirect:http://localhost:8081/login";
+		}
+		String accessPermission=this.validation.manageRoleAccess(role_list, this.vaiTroService.getVaiTroByName("ROLE_ADMIN"));
+		if(!accessPermission.equals("ok")) {
+			return "redirect:"+accessPermission;
+		}
+		
+		List<DanhMuc> danhMucs=this.danhMucService.getAllDanhMuc();
+		List<HangSanXuat> hangSanXuats=this.hangSanXuatService.getAllHSX();
+		model.addAttribute("danhMucs", danhMucs);
+		model.addAttribute("hangSanXuats", hangSanXuats);
+		
+		
+		return "Admin/quanLySanPham";
 	}
 	
 	

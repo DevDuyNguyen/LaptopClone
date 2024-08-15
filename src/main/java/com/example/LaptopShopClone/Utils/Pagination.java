@@ -1,6 +1,8 @@
 package com.example.LaptopShopClone.Utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Pagination {
@@ -22,7 +24,7 @@ public class Pagination {
 	
 	public List<Integer> generatePageList(int currentPage) {
 		List<Integer> pageList=new ArrayList<Integer>();
-		if(currentPage>=1 && currentPage<=5) {
+		if(currentPage>=1 && currentPage<5) {
 			for(int i=1; i<=noAllowedPage && i<=totalPage; ++i)
 				pageList.add(i);
 		}
@@ -34,6 +36,7 @@ public class Pagination {
 			//left side
 			for(int i=1; i<=halfAllowedPage; ++i)
 				pageList.add(currentPage-i);
+			Collections.sort(pageList);
 			pageList.add(currentPage);
 			//right side
 			for(int i=1; i<=halfAllowedPage; ++i)

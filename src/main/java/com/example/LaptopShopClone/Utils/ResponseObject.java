@@ -5,8 +5,11 @@ import java.util.List;
 
 public class ResponseObject {
 	private String status;
-	List<String> errors=new ArrayList<String>();
-	Object data;
+	private List<String> errors=new ArrayList<String>();
+	private Object data;
+	private int currentPage;
+	private int totalPage;
+	
 	public String getStatus() {
 		return status;
 	}
@@ -24,6 +27,18 @@ public class ResponseObject {
 	}
 	public void setData(Object data) {
 		this.data = data;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
 	}
 	
 	

@@ -114,6 +114,7 @@ public class LoginController {
 		
 		if(httpSession!=null) {
 			model.asMap().remove("loggedUser");
+			model.asMap().remove("role_list");
 			httpSession.invalidate();
 			System.out.println("Session is invalidated");
 		}
