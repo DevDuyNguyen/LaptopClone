@@ -38,7 +38,7 @@
 				</div>
 				&nbsp;&nbsp; &nbsp;&nbsp;
 				<th:block th:if="${trangThaiDonHang=='Tất cả' or trangThaiDonHang=='Đang chờ phê duyệt'}">
-					<button type="button" class="btn btn-primary" id="btnDuyetDonHang">Duyệt toàn bộ</button>
+					<button type="button" class="btn btn-primary" id="btnDuyetDonHangAll">Duyệt toàn bộ</button>
 				</th:block>
 				
 				
@@ -67,7 +67,7 @@
 				</thead>
 				<tbody th:each="donHang:${donHangList}">
 					
-					<tr th:id="${donHang.id}">
+					<tr th:id="${donHang.id}" class="donHangRow">
 						<td th:text="${donHang.id}"></td>
 						<td th:text="${donHang.hoTenNguoiNhan}"></td>
 						<td th:text="${donHang.trangThaiDonHang}"></td>

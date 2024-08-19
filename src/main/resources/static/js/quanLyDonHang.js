@@ -37,6 +37,13 @@ $(document).ready(function(){
 	    duyetDonHang(donHangId);
 	});
 
+	$("#btnDuyetDonHangAll").click(function(){
+	    let donHangRowList=$(".donHangRow");
+	    donHangRowList.each(function(){
+	        duyetDonHang(this.getAttribute("id"));
+	    })
+	});
+
 });
 
 
