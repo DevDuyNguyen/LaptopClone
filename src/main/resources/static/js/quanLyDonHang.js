@@ -57,6 +57,7 @@ function showDonHangChitiet(donHang){
 			
 			openModal(modalTarget, overlay);
 			
+			
 		}
 	};
 	
@@ -102,7 +103,8 @@ if(huyDonHangButtonList!==null){
 
 
 function openModal(modal, overlay){
-	modal.classsList.add("active");
+	console.log(modal);
+	modal.classList.add("active");
 	overlay.classList.add("active");
 	
 }
