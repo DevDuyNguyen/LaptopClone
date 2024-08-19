@@ -13,7 +13,7 @@
 	
 			<form class="form-inline" id="searchForm" name="searchObject" th:action="@{/admin/don-hang}">
 	
-				<select class="form-control" id="trangThaiDonHang" name="trangThaiDonHang" th:value="${trangThaiDonHang}">
+				<select class="form-control" id="trangThaiDonHang" name="trangThaiDonHang">
 					<option value="Tất cả">Tất cả</option>
 					<option value="Tất cả" th:if="${trangThaiDonHang=='Tất cả'}" selected>Tất cả</option>
 					<option value="Đang chờ giao">Đang chờ giao</option>
@@ -37,7 +37,10 @@
 					<input class="form-control" type="date" id="endDate" name="endDate" placeholder="Đến ngày" th:value="${endDate}">
 				</div>
 				&nbsp;&nbsp; &nbsp;&nbsp;
-				<button type="button" class="btn btn-primary" id="btnDuyetDonHang">Duyệt Đơn</button>
+				<th:block th:if="${trangThaiDonHang=='Tất cả' or trangThaiDonHang=='Đang chờ phê duyệt'}">
+					<button type="button" class="btn btn-primary" id="btnDuyetDonHang">Duyệt toàn bộ</button>
+				</th:block>
+				
 				
 				<div class="form-group" style="float: right; margin-right: 20px">
 					<input class="form-control" type="number" id="donHangID" name="donHangID" placeholder="Nhập mã để tìm nhanh"> 
@@ -64,7 +67,7 @@
 				</thead>
 				<tbody th:each="donHang:${donHangList}">
 					
-					<tr>
+					<tr th:id="${donHang.id}">
 						<td th:text="${donHang.id}"></td>
 						<td th:text="${donHang.hoTenNguoiNhan}"></td>
 						<td th:text="${donHang.trangThaiDonHang}"></td>
@@ -85,7 +88,7 @@
 							th:data-trangThaiDonHang="${donHang.trangThaiDonHang}"
 							onclick="showDonHangChitiet(this)">Chi tiết</button>
 							
-							<button type="button" th:if="${donHang.trangThaiDonHang!='Đang chờ giao'}">Phân công</button>
+							<button type="button" th:if="${donHang.trangThaiDonHang=='Đang chờ phê duyệt'}" class="btnDuyetDonHang">Duyệt</button>
 							
 						</td>
 					</tr>

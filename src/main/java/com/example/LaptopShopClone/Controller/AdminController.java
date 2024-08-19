@@ -100,9 +100,18 @@ public class AdminController {
 			@RequestParam(name ="trangThaiDonHang", defaultValue = "Tất cả") String trangThaiDonHang,
 			@RequestParam(name = "startDate", defaultValue = "") String startDate,
 			@RequestParam(name="endDate", defaultValue = "") String endDate,
-			@RequestParam(name="donHangID", defaultValue = "0") long donHangID
+			@RequestParam(name="donHangID", defaultValue = "0") long donHangID,
+			HttpServletRequest httpServletRequest
+			
 			) {
 		
+		if(!this.validation.isLoggin(httpServletRequest)) {
+			return "redirect:/home";
+		}
+		String roleAccess=this.validation.manageRoleAccess(getLoggedUserVaiTro(httpServletRequest), this.vaiTroService.getVaiTroByName("ROLE_ADMIN"));
+		if(!roleAccess.equals("ok")) {
+			return "redirect:"+roleAccess;
+		}
 		
 		SearchDonHangCriteria searchDonHangCriteria=new SearchDonHangCriteria();
 		searchDonHangCriteria.setTrangThaiDonHang(trangThaiDonHang);

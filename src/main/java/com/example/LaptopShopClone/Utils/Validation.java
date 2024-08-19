@@ -5,12 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
 import com.example.LaptopShopClone.ServiceImpl.NguoiDungServiceImpl;
+import com.example.LaptopShopClone.ServiceInterface.VaiTroService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,9 @@ import jakarta.servlet.http.HttpSession;
 
 @Service
 public class Validation {
+	
+	@Autowired 
+	VaiTroService vaiTroService;
 	
 	NguoiDungServiceImpl nguoiDungServiceImpl;
 	
@@ -63,6 +68,17 @@ public class Validation {
 		HttpSession session=httpServletRequest.getSession();
 		NguoiDung nguoiDung=(NguoiDung)session.getAttribute("loggedUser");
 		return nguoiDung!=null;
+	}
+	
+	public boolean isAdmin(NguoiDung loggedUser, List<VaiTro> role_list) {
+		if(loggedUser==null || role_list==null)
+			return false;
+		for(VaiTro role: role_list) {
+			if(role.getTenVaiTro().equals("ROLE_ADMIN"))
+				return true;
+		}
+		
+		return false;
 	}
 	
 }

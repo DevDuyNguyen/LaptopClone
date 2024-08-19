@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 
 //class ChiTietDonHangListSerializer extends JsonSerializer<List<ChiTietDonHang>>{
 //	
@@ -38,6 +42,72 @@ import jakarta.persistence.OneToOne;
 //	}
 //	
 //}
+
+class NguoiDatSerialzer extends JsonSerializer<NguoiDung>{
+
+	
+	
+	@Override
+	public void serialize(NguoiDung value, JsonGenerator jgen, SerializerProvider serializerProvider) {
+		
+		if(value==null) {
+			try {
+				jgen.writeStartObject();
+				jgen.writeNull();
+				jgen.writeEndObject();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return;
+		}
+		
+		try {
+			jgen.writeStartObject();
+			jgen.writeNumberField("id", value.getId());;
+			jgen.writeStringField("email", value.getEmail());
+			jgen.writeStringField("hoTen", value.getHoTen());
+			jgen.writeStringField("soDienThoai", value.getSoDienThoai());
+			jgen.writeStringField("diaChi", value.getDiaChi());
+			jgen.writeEndObject();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+}
+
+class ShipperSerialzer extends JsonSerializer<NguoiDung>{
+	@Override
+	public void serialize(NguoiDung value, JsonGenerator jgen, SerializerProvider serializerProvider) {
+		if(value==null) {
+			try {
+				jgen.writeStartObject();
+				jgen.writeNull();
+				jgen.writeEndObject();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			return;
+		}
+		
+		try {
+			jgen.writeStartObject();
+			jgen.writeNumberField("id", value.getId());;
+			jgen.writeStringField("email", value.getEmail());
+			jgen.writeStringField("hoTen", value.getHoTen());
+			jgen.writeStringField("soDienThoai", value.getSoDienThoai());
+			jgen.writeStringField("diaChi", value.getDiaChi());
+			jgen.writeEndObject();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+}
 
 @Entity
 public class DonHang {
@@ -62,14 +132,20 @@ public class DonHang {
 	
 	@ManyToOne
 	@JoinColumn(name ="ma_nguoi_dat")
+	@JsonSerialize(using=NguoiDatSerialzer.class)
 	private NguoiDung nguoiDat;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="ma_shipper")
+	@JsonSerialize(using = ShipperSerialzer.class)
+//	@JsonIgnore
 	private NguoiDung shipper;
 	
 	@OneToMany(mappedBy = "donHang")
+//	@JsonIgnore
 	private List<ChiTietDonHang> danhSachChiTiet;
+
 	
 	public DonHang() {
 		super();

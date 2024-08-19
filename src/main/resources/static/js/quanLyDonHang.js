@@ -1,3 +1,46 @@
+
+$(document).ready(function(){
+	let closeButtonList=document.querySelectorAll(".modal-close-button");
+	if(closeButtonList!==null){
+		closeButtonList.forEach(button=>{
+			button.addEventListener("click",()=>{
+				let modal=button.closest(".my-modal");
+				let overlay=document.getElementById("overlay");
+				closeModal(modal, overlay);
+			})
+		});
+	
+	}
+	
+	overlay.addEventListener("click",()=>{
+		let modalList=document.querySelectorAll(".my-modal");
+		let overlay=document.getElementById("overlay");
+		modalList.forEach(modal=>{
+			closeModal(modal, overlay);
+		});
+		
+	});
+	
+	let huyDonHangButtonList=document.querySelectorAll(".huyDonHangButton");
+	if(huyDonHangButtonList!==null){
+		huyDonHangButtonList.forEach(button=>{
+			let donHangRow=button.closest("tr");
+			let donHangID=button.getAttribute("data-donHangID");
+			button.addEventListener("click", ()=>{
+				huyDonHang(donHangRow, donHangID);
+			})
+		})
+	}
+	
+	$(".btnDuyetDonHang").click(function(){
+	    let donHangId=this.closest("tr").getAttribute("id");
+	    duyetDonHang(donHangId);
+	});
+
+});
+
+
+
 function showDonHangChitiet(donHang){
 	console.log(donHang);
 	let donHangId=donHang.getAttribute("data-donhangID");
@@ -65,43 +108,6 @@ function showDonHangChitiet(donHang){
 	
 }
 
-
-
-let closeButtonList=document.querySelectorAll(".modal-close-button");
-if(closeButtonList!==null){
-	closeButtonList.forEach(button=>{
-		button.addEventListener("click",()=>{
-			let modal=button.closest(".my-modal");
-			let overlay=document.getElementById("overlay");
-			closeModal(modal, overlay);
-		})
-	});
-
-}
-
-overlay.addEventListener("click",()=>{
-	let modalList=document.querySelectorAll(".my-modal");
-	let overlay=document.getElementById("overlay");
-	modalList.forEach(modal=>{
-		closeModal(modal, overlay);
-	});
-	
-});
-
-let huyDonHangButtonList=document.querySelectorAll(".huyDonHangButton");
-if(huyDonHangButtonList!==null){
-	huyDonHangButtonList.forEach(button=>{
-		let donHangRow=button.closest("tr");
-		let donHangID=button.getAttribute("data-donHangID");
-		button.addEventListener("click", ()=>{
-			huyDonHang(donHangRow, donHangID);
-		})
-	})
-}
-
-
-
-
 function openModal(modal, overlay){
 	console.log(modal);
 	modal.classList.add("active");
@@ -114,7 +120,9 @@ function closeModal(modal, overlay){
 	
 }
 function huyDonHang(donHangRow, donHangID){
-	alert("Bạn có chắc muốn hủy đơn hàng "+donHangID+"?");
+	let userChoice=confirm("Bạn có chắc muốn hủy đơn hàng "+donHangID+"?");
+	if(userChoice==false)
+		return;
 	let xhr=new XMLHttpRequest();
 	
 	xhr.open("GET","/api/donhang/huyDonHang?donHangId="+donHangID, true);
@@ -132,4 +140,77 @@ function huyDonHang(donHangRow, donHangID){
 	}
 	
 	xhr.send();
+}
+
+function duyetDonHang(donHangId){
+	console.log("inside duyetDonHang");
+    $.ajax({
+        url:"/api/donhang/duyetDonHang?donHangId="+donHangId,
+        type:"POST",
+        async:true,
+        success:function(result,status,xhr){
+        	console.log("inside sucess");
+        	console.log(status);	
+ 
+            if(status==="success"){
+            	console.log(200);
+                if(result.status==="success"){
+                	console.log("success");
+               
+                	console.log(result);
+                	
+                    let donHangRowJQuery=$('#'+donHangId);
+                    donHangRowJQuery.empty();
+    				console.log("HERE:"+donHangRowJQuery[0]);
+    				
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.id);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.hoTenNguoiNhan);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.trangThaiDonHang);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.tongGiaTri);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayDatHang);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayGiaoHang);
+                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayNhanHang);
+                    
+                    console.log(result.data.shipper);
+                    if(result.data.shipper!==null)
+                        donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.shipper.id);
+                    else
+                        donHangRowJQuery.append(document.createElement("td").innerHTML="");
+
+                    let donHangBtns=document.createElement("td");
+                    
+                    if(result.data.trangThaiDonHang!="Hoàn thành" && result.data.trangThaiDonHang!="Đã bị hủy"){
+                        let btnHuy=document.createElement("button");
+                        btnHuy.setAttribute("data-donHangID", result.data.id);
+                        btnHuy.classList.add("huyDonHangButton");
+                        btnHuy.innerText="Hủy";
+                        donHangBtns.append(btnHuy);
+                    }
+
+                    let btnChiTietDH=document.createElement("button");
+                    btnChiTietDH.setAttribute("data-modal-target","modal-chitietdonhang");
+                    btnChiTietDH.setAttribute("data-donhangID", result.data.id);
+                    btnChiTietDH.setAttribute("data-trangThaiDonHang", result.data.trangThaiDonHang);
+                    console.log(1);
+                    btnChiTietDH.addEventListener("click", function(){
+                    	showDonHangChitiet(this)
+                    });
+                    console.log(1);
+                    btnChiTietDH.innerText="Chi tiết";
+                    donHangBtns.append(btnChiTietDH);
+
+                    if(result.data.trangThaiDonHang!="Đang chờ phê duyệt"){
+                        let btnDuyet=document.createElement("button");
+                        btnDuyet.classList.add("btnDuyetDonHang");
+                        btnDuyet.innerText="Duyệt";
+                        donHangBtns.append(btnDuyet);
+                    }
+                    
+                }
+            }
+        },
+        complete:function(xhr,status){
+        	console.log(status);
+        }
+    });
 }
