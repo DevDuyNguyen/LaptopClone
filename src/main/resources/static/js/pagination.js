@@ -21,37 +21,53 @@ function pagination(url, requestParam, divContainer, noPage, currentPage, totalP
 	
 	if(currentPage!=1){
 		let back=parseInt(currentPage)-1;
-		content+='<li class="page-item "><a class="pageNumber"  data-page='+back+'>'+'back'+'</a></li>';
+		content+='<li class="page-item"><a class="pageNumber"  data-page='+back+'>'+'back'+'</a></li>';
 	}
 	if(currentPage>=1 && currentPage<5){
 		for(let i=1; i<=noPage && i<=totalPage; ++i){
-			content+='<li class="page-item "><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			if(i!=currentPage)
+				content+='<li class="page-item"><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			else
+				content+='<li class="page-item"><a style="color:red" class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			
 		}
 	}
 	else if(currentPage==totalPage){
 		for(let i=currentPage-halfPage; i<=currentPage&&i>0; ++i){
-			content+='<li class="page-item "><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			if(i!=currentPage)
+				content+='<li class="page-item"><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			else
+				content+='<li style="color:red" class="page-item"><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
 		}
 	}
 	else{
 		//left side
 		for(let i=currentPage-halfPage; i<currentPage; ++i){
 
-			content+='<li class="page-item "><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
+			content+='<li class="page-item"><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
 		}
-		content+='<li class="page-item "><a class="pageNumber" data-page='+currentPage+'>'+currentPage+'</a></li>';
+		content+='<li class="page-item"><a style="color:red" class="pageNumber" data-page='+currentPage+'>'+currentPage+'</a></li>';
 		//right side
 		for(let i=1; i<=halfPage && i<=totalPage; ++i){
 			let page=currentPage+i;
-			content+='<li class="page-item "><a class="pageNumber" data-page='+page+'>'+page+'</a></li>';
+			content+='<li class="page-item"><a class="pageNumber" data-page='+page+'>'+page+'</a></li>';
 		}
 		
 	}
 	if(currentPage!=totalPage){
 		let next=parseInt(currentPage)+1;
 		
-		content+='<li class="page-item "><a class="pageNumber" data-page='+next+'>'+'next'+'</a></li>';
+		content+='<li class="page-item"><a class="pageNumber" data-page='+next+'>'+'next'+'</a></li>';
 	}
+	
+	
+	$(document).ready(function(){
+		$(".page-item").css("cursor","pointer");
+		
+	});
+	
+	
+	
 //	console.log(content);
 //	console.log(currentPage);
 //	console.log(noPage); 

@@ -49,9 +49,9 @@ $(document).ready(function(){
 
 
 function showDonHangChitiet(donHang){
-	console.log(donHang);
+	
+	
 	let donHangId=donHang.getAttribute("data-donhangID");
-	console.log(donHangId);
 	
 	let trangThaiDonHang=donHang.getAttribute("data-trangThaiDonHang");
 	console.log(trangThaiDonHang);
@@ -150,7 +150,10 @@ function huyDonHang(donHangRow, donHangID){
 }
 
 function duyetDonHang(donHangId){
-	console.log("inside duyetDonHang");
+	let userChoice=confirm("Bạn muốn duyệt đơn hàng có ID="+donHangId);
+	if(userChoice===false)
+		return;
+	
     $.ajax({
         url:"/api/donhang/duyetDonHang?donHangId="+donHangId,
         type:"POST",
