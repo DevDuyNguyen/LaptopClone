@@ -163,14 +163,15 @@ function duyetDonHang(donHangId){
                     donHangRowJQuery.empty();
     				console.log("HERE:"+donHangRowJQuery[0]);
     				
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.id);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.hoTenNguoiNhan);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.trangThaiDonHang);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.tongGiaTri);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayDatHang);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayGiaoHang);
-                    donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.ngayNhanHang);
-                    
+    				
+                    donHangRowJQuery.append($(document.createElement("td")).html(result.data.id)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.hoTenNguoiNhan)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.trangThaiDonHang)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.tongGiaTri)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.ngayDatHang)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.ngayGiaoHang)[0]);
+					donHangRowJQuery.append($(document.createElement("td")).html(result.data.ngayNhanHang)[0]);
+                                                                            
                     console.log(result.data.shipper);
                     if(result.data.shipper!==null)
                         donHangRowJQuery.append(document.createElement("td").innerHTML=result.data.shipper.id);
