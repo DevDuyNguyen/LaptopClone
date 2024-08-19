@@ -31,6 +31,7 @@ public class Pagination {
 		else if(currentPage==totalPage) {
 			for(int i=currentPage; i>totalPage-noAllowedPage &&i>0; --i)
 				pageList.add(i);
+			Collections.sort(pageList);
 		}
 		else {
 			//left side

@@ -29,7 +29,7 @@ function pagination(url, requestParam, divContainer, noPage, currentPage, totalP
 		}
 	}
 	else if(currentPage==totalPage){
-		for(let i=currentPage; i>currentPage-noPage&&i>0; --i){
+		for(let i=currentPage-halfPage; i<=currentPage&&i>0; ++i){
 			content+='<li class="page-item "><a class="pageNumber" data-page='+i+'>'+i+'</a></li>';
 		}
 	}
@@ -41,7 +41,7 @@ function pagination(url, requestParam, divContainer, noPage, currentPage, totalP
 		}
 		content+='<li class="page-item "><a class="pageNumber" data-page='+currentPage+'>'+currentPage+'</a></li>';
 		//right side
-		for(let i=1; i<=halfPage; ++i){
+		for(let i=1; i<=halfPage && i<=totalPage; ++i){
 			let page=currentPage+i;
 			content+='<li class="page-item "><a class="pageNumber" data-page='+page+'>'+page+'</a></li>';
 		}
