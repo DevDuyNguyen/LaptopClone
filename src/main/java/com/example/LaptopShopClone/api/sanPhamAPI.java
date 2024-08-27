@@ -79,7 +79,8 @@ public class sanPhamAPI {
 			@RequestParam(name="sapXepTheo", defaultValue = "") String sapXepTheo,
 			@RequestParam(name="searchByName", defaultValue = "") String searchByName,
 			@RequestParam(name="searchById", defaultValue = "0") long searchById,
-			@RequestParam(name="currentPage", defaultValue = "1") int currentPage
+			@RequestParam(name="currentPage", defaultValue = "1") int currentPage,
+			@RequestParam(name="sanPhamId", defaultValue = "0") long sanPhamId
 			){
 		
 		
@@ -101,6 +102,7 @@ public class sanPhamAPI {
 		searchSanPhamCriteria.setMaxValue(maxValue);
 		searchSanPhamCriteria.setSort(sapXepTheo);
 		searchSanPhamCriteria.setKeyWord(searchByName.split(" "));
+		searchSanPhamCriteria.setSanPhamId(sanPhamId);
 		List<SanPham> sanPhamList=this.sanPhamService.searchSanPham(searchSanPhamCriteria, currentPage, noResultPerPage);
 
 		int totalPage=this.sanPhamService.getTotalResultCount(searchSanPhamCriteria);

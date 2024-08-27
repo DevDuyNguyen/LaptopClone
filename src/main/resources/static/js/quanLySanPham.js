@@ -6,6 +6,20 @@ fillGlobalRequestParam();
 let paginationContainer=document.querySelector("#pagination");
 let noPage=5;
 
+$(document).ready(function(){
+    $(".btnTimSanPham").click(function(){
+
+    })
+    
+     $("#quickIdSearchForm").on( "submit", function( event ) {
+
+		event.preventDefault();
+		fillGlobalRequestParam();
+		searchSanPham(url, global_requestParam);
+	});
+    
+});
+
 let global_xhr=new XMLHttpRequest();
 global_xhr.open("GET", "/api/sanpham/searchSanPham", true);
 global_xhr.onload=function(){
@@ -62,14 +76,17 @@ function searchSanPham(url, requestParam){
 }
 
 function fillGlobalRequestParam(){
+	console.log("fillGlobalRequestParam");
 	global_requestParam="";
-	global_requestParam+="danhMuc="+document.querySelector("#danhMuc").value;
-	global_requestParam+="&hangSanXuat="+document.querySelector("#hangSanXuat").value;
+	global_requestParam+="danhMucId="+document.querySelector("#danhMuc").value;
+	global_requestParam+="&hangSXId="+document.querySelector("#hangSanXuat").value;
 	global_requestParam+="&minValue="+document.querySelector("#minValue").value;
 	global_requestParam+="&maxValue="+document.querySelector("#maxValue").value;
 	global_requestParam+="&searchByName="+document.querySelector("#searchByName").value;
 	global_requestParam+="&sapXepTheo="+document.querySelector("#sapXepTheo").value;
-//	console.log(global_requestParam);
+	global_requestParam+="&sanPhamId="+document.querySelector("#searchById").value;
+	
+	console.log(document.querySelector("#searchById").value);
 	
 }
 

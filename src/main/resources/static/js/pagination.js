@@ -17,7 +17,8 @@ function pagination(url, requestParam, divContainer, noPage, currentPage, totalP
 	noPage=parseInt(noPage);
 	let halfPage=parseInt(Math.floor(noPage/2));
 	
-	
+	if(totalPage==0)
+		return;
 	
 	if(currentPage!=1){
 		let back=parseInt(currentPage)-1;

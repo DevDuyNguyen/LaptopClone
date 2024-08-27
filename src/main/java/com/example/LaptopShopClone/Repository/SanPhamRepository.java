@@ -31,6 +31,7 @@ public class SanPhamRepository {
 		long danhMuc=searchSanPhamCriteria.getDanhMuc();
 		long hsx=searchSanPhamCriteria.getHsx();
 		String sort=searchSanPhamCriteria.getSort();
+		long sanPhamId=searchSanPhamCriteria.getSanPhamId();
 		
 		
 		
@@ -59,6 +60,10 @@ public class SanPhamRepository {
 		
 		if(hsx>0) {
 			sql+=" AND sp.ma_hang_sx='"+hsx+"'";
+		}
+		
+		if(sanPhamId!=0) {
+			sql+=" AND sp.id="+sanPhamId;
 		}
 		
 		if(!sort.equals("")) {

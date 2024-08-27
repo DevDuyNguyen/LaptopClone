@@ -11,7 +11,7 @@ public class SearchSanPhamCriteria {
 	private long hsx;
 	private String trangThai;
 	private String name;
-	
+	private long sanPhamId;
 	
 	public String[] getKeyWord() {
 		return keyWord;
@@ -71,6 +71,13 @@ public class SearchSanPhamCriteria {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public long getSanPhamId() {
+		return sanPhamId;
+	}
+	public void setSanPhamId(long sanPhamId) {
+		this.sanPhamId = sanPhamId;
+	}
+	
 	
 	
 	
