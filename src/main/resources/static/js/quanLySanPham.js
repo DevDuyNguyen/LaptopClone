@@ -8,8 +8,8 @@ let noPage=5;
 
 $(document).ready(function(){
     $(".btnTimSanPham").click(function(){
-		event.preventDefault();
 		fillGlobalRequestParam();
+		searchSanPham(url, global_requestParam);
     })
     
      $("#quickIdSearchForm").on( "submit", function( event ) {
