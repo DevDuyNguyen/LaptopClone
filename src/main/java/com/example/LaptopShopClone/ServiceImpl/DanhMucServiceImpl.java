@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.LaptopShopClone.Entity.DanhMuc;
 import com.example.LaptopShopClone.Repository.DanhMucRepository;
+import com.example.LaptopShopClone.ServiceInterface.DanhMucService;
 
 @Service
 public class DanhMucServiceImpl implements DanhMucService{
@@ -15,5 +16,9 @@ public class DanhMucServiceImpl implements DanhMucService{
 	
 	public List<DanhMuc> getAllDanhMuc(){
 		return this.danhMucRepository.getAllDanhMuc();
+	}
+	
+	public DanhMuc getDanhMucById(long id) {
+		return this.danhMucRepository.getDanhMucById(id);
 	}
 }

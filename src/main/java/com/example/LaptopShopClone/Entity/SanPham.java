@@ -18,9 +18,6 @@ class SanPhamDanhMucSerialzer extends JsonSerializer<DanhMuc>{
 	@Override
 	public void serialize(DanhMuc value, JsonGenerator jgen, SerializerProvider serializerProvider) {
 		try {
-//			jgen.writeStartObject();
-//			jgen.writeStringField("danhmuc", value.getTenDanhMuc());
-//			jgen.writeEndObject();
 			jgen.writeObject(value.getTenDanhMuc());
 			
 		} catch (Exception e) {
@@ -33,9 +30,6 @@ class SanPhamHangSanXuatSerialzer extends JsonSerializer<HangSanXuat>{
 	@Override
 	public void serialize(HangSanXuat value, JsonGenerator jgen, SerializerProvider serializerProvider) {
 		try {
-//			jgen.writeStartObject();
-//			jgen.writeStringField("danhmuc", value.getTenHangSanXuat());
-//			jgen.writeEndObject();
 			
 			jgen.writeObject(value.getTenHangSanXuat());
 			
@@ -64,6 +58,7 @@ public class SanPham {
 	private String ram;
 	private String thietKe;
 	private String dungLuongPin;
+	private String hinhAnh;
 	
 //	private MultipartFile hinhAnh; Cach xu ly anh
 
@@ -201,6 +196,15 @@ public class SanPham {
 
 	public void setHangSanXuat(HangSanXuat hangSanXuat) {
 		this.hangSanXuat = hangSanXuat;
+	}
+	
+
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
 	}
 
 	@Override

@@ -58,5 +58,9 @@ public class SanPhamServiceImpl implements SanPhamService{
 		return hangSanXuats;
 	}
 	
+	public void SaveOrUpdate(SanPham sp) {
+		this.sanPhamRepository.SaveOrUpdate(sp);
+	}
+	
 	
 }

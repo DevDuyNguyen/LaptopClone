@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.LaptopShopClone.Entity.NguoiDung;
 import com.example.LaptopShopClone.Entity.VaiTro;
-import com.example.LaptopShopClone.ServiceImpl.DanhMucService;
+import com.example.LaptopShopClone.ServiceInterface.DanhMucService;
 import com.example.LaptopShopClone.ServiceInterface.GioHangService;
 import com.example.LaptopShopClone.ServiceInterface.NguoiDungService;
 import com.example.LaptopShopClone.ServiceInterface.SanPhamService;

@@ -1,32 +1,30 @@
 .my-modal{
 	position:fixed;
-    top:0%;
-    bottom:0%;
-    left:20%;
-    right:20%;
+    top:5%;
+    bottom:5%;
     visibility:hidden;
     background-color:white;
-    z-index:100;
+    z-index:10;
     
     
  }
-  .my-modal.active{
-     visibility:visible;
-  }
+.my-modal.active{
+   visibility:visible;
+}
 
-  #overlay{
-    background-color: gray;
-    opacity: 0.5;
-    visibility: hidden;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+#overlay{
+  background-color: gray;
+  opacity: 0.5;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-  }
+}
 
-  #overlay.active{
-    visibility: visible;
-    pointer-events: all;
-  }
+#overlay.active{
+  visibility: visible;
+  pointer-events: all;
+}

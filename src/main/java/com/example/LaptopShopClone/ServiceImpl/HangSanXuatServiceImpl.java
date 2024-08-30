@@ -17,4 +17,8 @@ public class HangSanXuatServiceImpl implements HangSanXuatService{
 	public List<HangSanXuat> getAllHSX(){
 		return this.hangSanXuatRepository.getAllHSX();
 	}
+	
+	public HangSanXuat getHSXById(long id) {
+		return this.hangSanXuatRepository.getHSXById(id);
+	}
 }

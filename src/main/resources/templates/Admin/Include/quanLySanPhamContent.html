@@ -13,7 +13,7 @@
 	
 			<div class="form-group form-inline">
 				<label for="sel1">THÊM MỚI SẢN PHẨM (THEO DANH MỤC): </label> 
-				<select id="danhMucDropdown" class="form-control">
+				<select id="danhMucDropdown" class="form-control" onfocus="this.selectedIndex=-1;">
 					<th:block th:each="danhmuc:${danhMucs}">
 						<option th:value="${danhmuc.tenDanhMuc}" th:text="${danhmuc.tenDanhMuc}"></option>
 					</th:block>
@@ -89,6 +89,185 @@
 				</tbody>
 	
 			</table>
+			
+			
+			<div class="row col-md-6">
+					<div class="my-modal" id="lapTopModal">
+						<form>
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"></h5>
+									<button type="button" class="closeModalButton" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div>
+											<input type="hidden" class="form-control" name="danhMucId" id="idDanhMucLaptop">
+										</div>
+										<div class="form-group col-md-7">
+											<label for="tenSanPham">Tên sản phẩm</label> 
+											<input type="text" name="tenSanPham">
+										</div>
+										<div class="form-group col-md-5">
+											<label for="donGia">Đơn giá</label> 
+											<input type="number" class="form-control" name="donGia" min="0" value="0" id="test">
+										</div>
+									</div>
+		
+									<div class="row">
+										<div class="form-group col-md-4">
+											<label for="hsxID">Hãng Sản Xuất</label> 
+											<select name="hsxID" class="form-control" id="hsxID">
+												<th:block th:each="hsx:${hangSanXuats}">
+													<option th:value="${hsx.id}" th:text="${hsx.tenHangSanXuat}"></option>
+												</th:block>
+											</select>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="heDieuHanh">Hệ điều hành</label> 
+											<input type="text" class="form-control" name="heDieuHanh">
+										</div>
+		
+										<div class="form-group col-md-4">
+											<label for="ram">Ram</label> 
+											<input type="text" class="form-control" name="ram" required="required">
+										</div>
+		
+									</div>
+		
+									<div class="row">
+		
+										<div class="form-group col-md-4">
+											<label for="manHinh">Màn hình</label> 
+											<input type="text" class="form-control" name="manHinh" required="required">
+										</div>
+										<div class="form-group col-md-4">
+											<label for="cpu">CPU</label>
+											<input type="text" class="form-control" name="cpu">
+										</div>
+										<div class="form-group col-md-4">
+											<label for="thietKe">Thiết kế</label> 
+											<input type="text" class="form-control" name="thietKe" required="required">
+										</div>
+									</div>
+		
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="thongTinChung">Mô tả chung</label>
+											<textarea class="form-control" name="thongTinChung"
+												placeholder="" rows="4" required="required"></textarea>
+										</div>
+									</div>
+		
+									<div class="row">
+										<div class="form-group col-md-4">
+											<label for="dungLuongPin">Dung lượng Pin</label>
+											<input type="text" class="form-control" name="dungLuongPin" required="required">
+										</div>
+										<div class="form-group col-md-4">
+											<label for="inputEmail4">Thông tin bảo hành</label> 
+											<textarea class="form-control" name="thongTinBaoHanh"
+												placeholder="" rows="4" required="required"></textarea>
+										</div>
+		
+										<div class="form-group col-md-4">
+											<label for="donViKho">Số lượng</label> 
+											<input type="number" class="form-control" name="donViKho" min="0" required="required" value="0" id="test2">
+										</div>
+									</div>
+									<div>
+										<label for="inputEmail4">Hình ảnh</label> 
+										<input type="file" class="form-control" id="inputEmail4" name="hinhAnh">
+									</div>
+								</div>
+		
+								<div class="modal-footer">
+									<input id="ModalSubmitButton" type="submit" value="Xác nhận">
+								</div>
+		
+							</div>
+						</form>
+						
+					</div>
+			</div>
+			
+			
+			<div class="my-modal" id="notLaptopModal">
+				<form>
+					<div >
+						<div>
+							<div>
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"></h5>
+									<button type="button" class="closeModalButton" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div>
+											<input type="hidden" class="form-control" name='danhMucId' id="idDanhMucKhac">
+										</div>
+										
+										<div class="form-group col-md-12">
+											<label for="tenSanPham">Tên sản phẩm</label> 
+											<input type="text" class="form-control" name="tenSanPham">
+										</div>
+										
+									</div>
+		
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="hsxID">Hãng Sản Xuất</label> 
+											<select name="hsxID" id="hsxID" class="form-control">
+												<th:block th:each="hsx:${hangSanXuats}">
+													<option th:value="${hsx.id}" th:text="${hsx.tenHangSanXuat}"></option>
+												</th:block>
+											</select>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="donGia">Đơn giá</label>
+											<input type="number" class="form-control" name="donGia" min="0" value="0" id="donGia">
+										</div>
+									</div>
+		
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="thongTinChung">Mô tả chung</label>
+											<textarea class="form-control" id="thongTinChung" placeholder="" rows="2" name="thongTinChung"></textarea>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="thongTinBaoHanh">Thông tin bảo hành</label> 
+											<input type="text" class="form-control" id="thongTinBaoHanh" name="thongTinBaoHanh">
+										</div>
+		
+										<div class="form-group col-md-6">
+											<label for="donViKho">Số lượng</label> 
+											<input type="number" class="form-control" name="donViKho" min="0" value="0">
+										</div>
+									</div>
+									<div>
+										<label for="inputEmail4">Hình ảnh</label> 
+										<input type="file" class="form-control" name="hinhAnh">
+									</div>
+								</div>
+		
+								<div class="modal-footer">
+									<button id="ModalSubmitButton" type="submit">Xác nhận</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div id="overlay"></div>
+			
 	
 			<div id="pagination"></div>
 		</div>

@@ -18,6 +18,32 @@ $(document).ready(function(){
 		fillGlobalRequestParam();
 		searchSanPham(url, global_requestParam);
 	});
+	
+	$("#danhMucDropdown").on("input", function(){
+	  if(this.value==="Laptop"){
+	    let modal=document.getElementById("lapTopModal");
+	    openModal(modal);
+	  }
+	  else{
+	    let modal=document.getElementById("notLaptopModal");
+	    openModal(modal);
+	    console.log(modal);
+	  }
+	
+	});
+	
+	
+	$("#overlay").on("click",function(){
+	  $(".my-modal").each(function(){
+	    closeModal(this);
+	  })
+	});
+	
+	$(".closeModalButton").on("click",function(){
+	  let modal=this.closest(".my-modal");
+	  closeModal(modal);
+	
+	});
     
 });
 
@@ -89,5 +115,15 @@ function fillGlobalRequestParam(){
 	
 	console.log(document.querySelector("#searchById").value);
 	
+}
+
+function openModal(modal){
+  modal.classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+}
+
+function closeModal(modal){
+  modal.classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
 }
 

@@ -6,4 +6,5 @@ import com.example.LaptopShopClone.Entity.HangSanXuat;
 
 public interface HangSanXuatService {
 	 List<HangSanXuat> getAllHSX();
+	 public HangSanXuat getHSXById(long id);
 }

@@ -14,4 +14,5 @@ public interface SanPhamService {
 	SanPham getSanPhamByID(long id);
 	Set<DanhMuc> getAllDanhMucFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria);
 	Set<HangSanXuat> getAllHSXFromsearchSanPham(SearchSanPhamCriteria searchSanPhamCriteria);
+	public void SaveOrUpdate(SanPham sp);
 }

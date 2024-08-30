@@ -81,4 +81,19 @@ public class Validation {
 		return false;
 	}
 	
+	public boolean isStringNullOrEmptyString(String str) {
+		if(str==null || str.equals(""))
+			return true;
+		return false;
+	}
+	
+	public boolean isNumberic(String number) {
+		try {
+			Double.parseDouble(number);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
+	
 }

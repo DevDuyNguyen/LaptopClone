@@ -27,6 +27,12 @@ public class DanhMucRepository {
 		
 	}
 	
+	public DanhMuc getDanhMucById(long id) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		return session.find(DanhMuc.class, id);
+		
+	}
+	
 	
 	
 }

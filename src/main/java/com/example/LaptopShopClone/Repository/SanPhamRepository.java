@@ -136,6 +136,17 @@ public class SanPhamRepository {
 		return sp;
 	}
 	
+	public void SaveOrUpdate(SanPham sp) {
+		SanPham tmp=getSanPhamByID(sp.getId());
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		if(tmp==null) {
+			session.persist(sp);
+		}
+		else {
+			session.merge(sp);
+		}
+	}
+	
 	
 	
 	//search by id

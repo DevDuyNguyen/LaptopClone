@@ -22,5 +22,10 @@ public class HangSanXuatRepository {
 		return sql.getResultList();
 	}
 	
+	public HangSanXuat getHSXById(long id) {
+		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		return session.find(HangSanXuat.class, id);
+	}
+	
 	
 }
