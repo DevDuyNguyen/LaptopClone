@@ -15,7 +15,7 @@
 				<label for="sel1">THÊM MỚI SẢN PHẨM (THEO DANH MỤC): </label> 
 				<select id="danhMucDropdown" class="form-control" onfocus="this.selectedIndex=-1;">
 					<th:block th:each="danhmuc:${danhMucs}">
-						<option th:value="${danhmuc.tenDanhMuc}" th:text="${danhmuc.tenDanhMuc}"></option>
+						<option th:value="${danhmuc.id}" th:text="${danhmuc.tenDanhMuc}"></option>
 					</th:block>
 				</select>
 			</div>
@@ -93,7 +93,7 @@
 			
 			<div class="row col-md-6">
 					<div class="my-modal" id="lapTopModal">
-						<form>
+						<form id="laptopForm">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -188,6 +188,8 @@
 								</div>
 		
 							</div>
+							
+							<button type="button" id="forTestLaptopForm">For test only</button>
 						</form>
 						
 					</div>
@@ -195,7 +197,7 @@
 			
 			
 			<div class="my-modal" id="notLaptopModal">
-				<form>
+				<form id="notLaptopForm">
 					<div >
 						<div>
 							<div>

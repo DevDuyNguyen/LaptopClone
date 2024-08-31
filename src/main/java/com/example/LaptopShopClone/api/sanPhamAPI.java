@@ -169,7 +169,9 @@ public class sanPhamAPI {
 			
 			){
 		
-		if(this.validation.isAdmin(this.getLoggedUser(httpServletRequest), this.getLoggedUserVaiTro(httpServletRequest))) {
+		System.out.println("addSanPham is called ");
+		
+		if(!this.validation.isAdmin(this.getLoggedUser(httpServletRequest), this.getLoggedUserVaiTro(httpServletRequest))) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
@@ -259,8 +261,8 @@ public class sanPhamAPI {
 		errorsContainer.isInteger(sanPhamDTO.getDonViKho(), "donViKho");
 		errorsContainer.isPositiveNumber(sanPhamDTO.getDonViKho(), "donViKho");
 		
-		errorsContainer.isInteger(sanPhamDTO.getDonViBan(), "donViBan");
-		errorsContainer.isPositiveNumber(sanPhamDTO.getDonViBan(), "donViBan");
+//		errorsContainer.isInteger(sanPhamDTO.getDonViBan(), "donViBan");
+//		errorsContainer.isPositiveNumber(sanPhamDTO.getDonViBan(), "donViBan");
 		
 		
 		//check if danh muc is valid

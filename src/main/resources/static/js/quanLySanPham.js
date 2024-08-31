@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});
 	
 	$("#danhMucDropdown").on("input", function(){
-	  if(this.value==="Laptop"){
+	  if(this.value==1){
 	    let modal=document.getElementById("lapTopModal");
 	    openModal(modal);
 	  }
@@ -42,6 +42,81 @@ $(document).ready(function(){
 	$(".closeModalButton").on("click",function(){
 	  let modal=this.closest(".my-modal");
 	  closeModal(modal);
+	
+	});
+	
+	//for test only
+	
+	$("#forTestLaptopForm").on("click", function(){
+	    $("#laptopForm").find("[name='tenSanPham']").attr("value", "sp1");
+	    $("#laptopForm").find("[name='donGia']").attr("value", 1222);
+	    $("#laptopForm").find("[name='hsxID']").attr("value", "2");
+	    $("#laptopForm").find("[name='ram']").attr("value", "4gb");
+	    $("#laptopForm").find("[name='manHinh']").attr("value", "12pixel");
+	    $("#laptopForm").find("[name='cpu']").attr("value", "intelcore5");
+	    $("#laptopForm").find("[name='thietKe']").attr("value", "asdfadfaf");
+	    $("#laptopForm").find("[name='thongTinChung']").html("asdfadfaf");
+	    $("#laptopForm").find("[name='dungLuongPin']").attr("value", "asdfadfaf");
+	    $("#laptopForm").find("[name='thongTinBaoHanh']").attr("value", "asdfadfaf");
+	    $("#laptopForm").find("[name='donViKho']").attr("value", 12);
+    	$("#laptopForm").find("[name='thongTinBaoHanh']").html("asdfasdf");
+	});
+	
+	
+	$("#laptopForm").on("submit", function(e){
+	    e.preventDefault();
+	    let formData=new FormData();
+	    $(this).find("input").each(function(){
+	        let name=this.getAttribute("name");
+	        let inputType=this.getAttribute("type");
+	       
+	        
+	        if(inputType!=="submit"){
+	        	
+	        	console.log(inputType);
+	        	console.log(name);
+	        	
+		        if(inputType!=="file"){
+		            formData.append(name, this.value);
+		            console.log("not file");
+		            console.log(this.value);
+		            
+		            
+		        }
+		        else{
+		            formData.append(name, this.files[0]);
+		            console.log("file");
+		            
+		        }
+		    }
+		   
+	        
+	
+	    });
+	    
+		$(this).find("textarea").each(function(){
+				let name=this.getAttribute("name");
+		    	formData.append(name, this.innerHTML);
+		});
+		
+		formData.append("danhMuc",document.getElementById("danhMucDropdown").value);
+	
+	    $.ajax({
+	        url:"/api/sanpham/addSanPham",
+	        async:true,
+	        success:function(result, status, xhr){
+	          console.log(result);
+	        },
+	        data:formData,
+	        processData: false, // Prevent jQuery from automatically transforming the data into a query string
+            contentType: false, // Set contentType to false as jQuery will tell the server it is a multipart form data request
+	       	type:"POST"
+	    });
+	    
+	    
+	
+	    //textarea
+	
 	
 	});
     

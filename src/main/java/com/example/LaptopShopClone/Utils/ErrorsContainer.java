@@ -24,6 +24,7 @@ public class ErrorsContainer<KeyType> {
 	@Autowired
 	HangSanXuatService hangSanXuatService;
 	
+	
 	private Map<KeyType, List<String>> errors=new HashMap<KeyType, List<String>>();
 	private boolean hasError=false;
 	
