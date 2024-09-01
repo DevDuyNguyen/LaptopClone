@@ -33,7 +33,6 @@ public class SanPhamDTO {
 		sanPham.setTenSanPham(this.tenSanPham);
 		sanPham.setDonGia(Long.parseLong(this.donGia));
 		sanPham.setDonViKho(Integer.parseInt(this.donViKho));
-		sanPham.setDonViBan(Integer.parseInt(this.donViBan));
 		sanPham.setThongTinBaoHanh(this.thongTinBaoHanh);
 		sanPham.setThongTinChung(this.thongTinChung);
 		sanPham.setManHinh(this.manHinh);

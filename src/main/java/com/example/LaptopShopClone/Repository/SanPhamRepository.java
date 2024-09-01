@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -139,12 +140,18 @@ public class SanPhamRepository {
 	public void SaveOrUpdate(SanPham sp) {
 		SanPham tmp=getSanPhamByID(sp.getId());
 		Session session=this.sessionFactoryUtil.getSessionFactory().openSession();
+		Transaction transaction=session.beginTransaction();
 		if(tmp==null) {
 			session.persist(sp);
 		}
 		else {
 			session.merge(sp);
 		}
+		
+		
+		transaction.commit();
+		
+		session.close();
 	}
 	
 	

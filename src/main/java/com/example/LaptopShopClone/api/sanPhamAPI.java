@@ -59,6 +59,8 @@ public class sanPhamAPI {
 	DanhMucService danhMucService;
 	@Autowired
 	HangSanXuatService hangSanXuatService;
+	@Autowired
+	ErrorsContainer<String> errorsContainer;
 	
 	
 	@ModelAttribute("loggedUser")
@@ -175,7 +177,7 @@ public class sanPhamAPI {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
-		ErrorsContainer<String> errorsContainer=new ErrorsContainer<String>();
+//		ErrorsContainer<String> errorsContainer=new ErrorsContainer<String>();
 		
 //		Map<String, List<String>> errors=new HashMap<String, List<String>>();
 //		errors.put("tenSanPham", new LinkedList<String>());
@@ -225,7 +227,6 @@ public class sanPhamAPI {
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getTenSanPham(), "tenSanPham");
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getDonGia(), "donGia");
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getDonViKho(), "donViKho");
-		errorsContainer.isEmptyOrNullString(sanPhamDTO.getDonViBan(), "donViBan");
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getThongTinBaoHanh(), "thongTinBaoHanh");
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getThongTinChung(), "thongTinChung");
 		errorsContainer.isEmptyOrNullString(sanPhamDTO.getManHinh(), "manHinh");
@@ -293,7 +294,8 @@ public class sanPhamAPI {
 		System.out.println(sanPham.toString());
 		
 		//Luu file hinh anh san pham co then la id cua san pham
-		Path hinhAnhSanPhamDir=Paths.get("/src/main/resources/HinhAnhSP");
+		Path staticServingDir=Paths.get("src/main/resources/static");
+		Path hinhAnhSanPhamDir=Paths.get("src/main/resources/static/HinhAnhSP");
 		if(!Files.exists(hinhAnhSanPhamDir)) {
 			try {
 				hinhAnhSanPhamDir=Files.createDirectory(hinhAnhSanPhamDir);
@@ -309,8 +311,11 @@ public class sanPhamAPI {
 		System.out.println("fileDir:");
 		System.out.println(fileDir.toAbsolutePath());
 		try {
-			Files.copy(sanPhamDTO.getHinhAnh().getInputStream(), hinhAnhSanPhamDir,StandardCopyOption.REPLACE_EXISTING);
-			sanPham.setHinhAnh(hinhAnhSanPhamDir.toString());
+//			Files.copy(sanPhamDTO.getHinhAnh().getInputStream(), hinhAnhSanPhamDir,StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(sanPhamDTO.getHinhAnh().getInputStream(), fileDir);
+//			sanPham.setHinhAnh(fileDir.toString());
+			sanPham.setHinhAnh(staticServingDir.relativize(fileDir).toString());
+			
 			this.sanPhamService.SaveOrUpdate(sanPham);
 		} catch (Exception e) {
 			System.out.println(e);

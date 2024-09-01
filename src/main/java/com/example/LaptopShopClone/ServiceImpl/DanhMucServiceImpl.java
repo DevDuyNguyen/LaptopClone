@@ -14,6 +14,10 @@ public class DanhMucServiceImpl implements DanhMucService{
 	@Autowired
 	DanhMucRepository danhMucRepository;
 	
+	public DanhMucServiceImpl() {
+		System.out.println("DanhMucServiceImpl is created");
+	}
+	
 	public List<DanhMuc> getAllDanhMuc(){
 		return this.danhMucRepository.getAllDanhMuc();
 	}

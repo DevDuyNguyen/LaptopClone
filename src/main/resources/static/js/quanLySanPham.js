@@ -60,9 +60,11 @@ $(document).ready(function(){
 	    $("#laptopForm").find("[name='thongTinBaoHanh']").attr("value", "asdfadfaf");
 	    $("#laptopForm").find("[name='donViKho']").attr("value", 12);
     	$("#laptopForm").find("[name='thongTinBaoHanh']").html("asdfasdf");
+    	$("#laptopForm").find("[name='heDieuHanh']").attr("value","asdfasdf");
+    	
 	});
 	
-	
+	//add san pham, laptopform
 	$("#laptopForm").on("submit", function(e){
 	    e.preventDefault();
 	    let formData=new FormData();
@@ -98,6 +100,14 @@ $(document).ready(function(){
 				let name=this.getAttribute("name");
 		    	formData.append(name, this.innerHTML);
 		});
+		
+		$(this).find("select").each(function(){
+			let name=this.getAttribute("name");
+			formData.append(name, this.value);
+			
+			
+		});
+		
 		
 		formData.append("danhMuc",document.getElementById("danhMucDropdown").value);
 	
