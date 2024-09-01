@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,6 +62,12 @@ public class sanPhamAPI {
 	HangSanXuatService hangSanXuatService;
 	@Autowired
 	ErrorsContainer<String> errorsContainer;
+	
+	@Value("${upload_dir}")
+	String upload_dir;
+	@Value("${upload_img_dir}")
+	String upload_img_dir;
+	
 	
 	
 	@ModelAttribute("loggedUser")
@@ -294,8 +301,8 @@ public class sanPhamAPI {
 		System.out.println(sanPham.toString());
 		
 		//Luu file hinh anh san pham co then la id cua san pham
-		Path staticServingDir=Paths.get("src/main/resources/static");
-		Path hinhAnhSanPhamDir=Paths.get("src/main/resources/static/HinhAnhSP");
+		Path staticServingDir=Paths.get(upload_dir);
+		Path hinhAnhSanPhamDir=Paths.get(upload_img_dir);
 		if(!Files.exists(hinhAnhSanPhamDir)) {
 			try {
 				hinhAnhSanPhamDir=Files.createDirectory(hinhAnhSanPhamDir);
@@ -314,7 +321,7 @@ public class sanPhamAPI {
 //			Files.copy(sanPhamDTO.getHinhAnh().getInputStream(), hinhAnhSanPhamDir,StandardCopyOption.REPLACE_EXISTING);
 			Files.copy(sanPhamDTO.getHinhAnh().getInputStream(), fileDir);
 //			sanPham.setHinhAnh(fileDir.toString());
-			sanPham.setHinhAnh(staticServingDir.relativize(fileDir).toString());
+			sanPham.setHinhAnh("\\"+staticServingDir.relativize(fileDir).toString());
 			
 			this.sanPhamService.SaveOrUpdate(sanPham);
 		} catch (Exception e) {

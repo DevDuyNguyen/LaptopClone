@@ -50,7 +50,7 @@
 					<a th:href="@{/sp?id=}+${sanPham.id}"><!-- xem chi tiet san pham, not done -->
 					
 						<!-- show anh cua san pham, not done -->
-						<img style="width: 300px; height: 238px" src="/laptopshop/img/${sanpham.id}.png">
+						<img style="width: 300px; height: 238px" th:src="${sanPham.hinhAnh}">
 						
 						<h3 th:text="${sanPham.tenSanPham}"></h3>
 						
